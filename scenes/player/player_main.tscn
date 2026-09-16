@@ -86,6 +86,9 @@ animations = [{
 }]
 
 [node name="PlayerMain" type="CharacterBody2D" unique_id=1867720141]
+z_index = 3
+collision_layer = 512
+collision_mask = 4
 script = ExtResource("1_enew3")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=154347732]
@@ -99,6 +102,7 @@ shape = SubResource("RectangleShape2D_yf5fn")
 debug_color = Color(0.7501165, 0.29387873, 0.87872946, 0.41960785)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1907422729]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"forward"
 

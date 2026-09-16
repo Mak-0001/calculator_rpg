@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://byb4pgup73io2"]
+
+[ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_o6xkw"]
+[ext_resource type="Texture2D" uid="uid://trfjvsv101ib" path="res://icon.svg" id="1_rkkm1"]
+[ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_qhaqp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1y6sv"]
+
+[node name="Room1" type="Node2D" unique_id=322616530]
+
+[node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_o6xkw")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=605389172]
+texture = ExtResource("1_rkkm1")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=989230519]
+position = Vector2(181, -1)
+texture = ExtResource("1_rkkm1")
+
+[node name="Gate" parent="." unique_id=776249544 instance=ExtResource("3_qhaqp")]
+position = Vector2(1, 0)
+destination_level = "res://scenes/world/lobby.tscn"
+
+[node name="CollisionShape2D" parent="Gate" index="0" unique_id=725538783]
+position = Vector2(290, 4)
+shape = SubResource("RectangleShape2D_1y6sv")
+debug_color = Color(0.6456857, 0.5224494, 1.92523e-07, 0.41960785)
+
+[editable path="Gate"]

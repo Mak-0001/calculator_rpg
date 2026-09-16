@@ -1,13 +1,14 @@
-extends CharacterBody2D
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+extends Entity;
+class_name playerMain;
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D;
 
 
 #region stałe
-const MAX_SPEED := 80.00
+const MAX_SPEED := 80.00;
 
-enum STATES {IDLE = 0, RUNNING = 1};
 #endregion
 
+#region basics
 func _on_ready() -> void:
 	pass # Replace with function body.
 
@@ -25,7 +26,9 @@ func _physics_process(delta: float) -> void:
 		velocity.y = MAX_SPEED * down_up_vec;
 		velocity.x = 0;
 	move_and_slide();
-	
+#endregion
+
+#region animations
 func anim_play():
 	if(velocity == Vector2.ZERO):
 		animated_sprite_2d.pause();
@@ -38,3 +41,8 @@ func anim_play():
 				animated_sprite_2d.play("forward");
 			else:
 				animated_sprite_2d.play("backward")
+
+#endregion
+#region health
+func die():
+	print("player died")

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://blkqpy5n4xime"]
+
+[ext_resource type="Script" uid="uid://b31glvmn1jgo5" path="res://scripts/global_scripts/map_menager.gd" id="1_lr0rt"]
+
+[node name="MapMenager" type="Node" unique_id=1698594890]
+script = ExtResource("1_lr0rt")
+
+[connection signal="ready" from="." to="." method="_on_ready"]

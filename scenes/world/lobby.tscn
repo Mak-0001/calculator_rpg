@@ -2,6 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_u3nvq"]
 [ext_resource type="Texture2D" uid="uid://trfjvsv101ib" path="res://icon.svg" id="2_pasi8"]
+[ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_pwvnl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18ld8"]
 
 [node name="Lobby" type="Node2D" unique_id=713859746]
 
@@ -12,3 +15,13 @@ position = Vector2(443, 189)
 z_index = -1
 position = Vector2(533, 178)
 texture = ExtResource("2_pasi8")
+
+[node name="Gate" parent="." unique_id=776249544 instance=ExtResource("3_pwvnl")]
+position = Vector2(318, 199)
+destination_level = "res://scenes/world/room1.tscn"
+
+[node name="CollisionShape2D" parent="Gate" index="0" unique_id=725538783]
+shape = SubResource("RectangleShape2D_18ld8")
+debug_color = Color(0.9471006, 5.0055983e-06, 0.5870054, 0.41960785)
+
+[editable path="Gate"]
