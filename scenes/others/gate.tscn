@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://jadnhxbu1cm0"]
 
 [ext_resource type="Script" uid="uid://blcxpbfigbtek" path="res://scripts/others/gate.gd" id="1_bl3dr"]
+[ext_resource type="Script" uid="uid://dc4xv1agq2mk4" path="res://scripts/resources_templates/door_keys_template.gd" id="2_18ld8"]
+
+[sub_resource type="Resource" id="Resource_bucd7"]
+script = ExtResource("2_18ld8")
+metadata/_custom_type_script = "uid://dc4xv1agq2mk4"
 
 [node name="Gate" type="Area2D" unique_id=776249544]
 collision_layer = 4
 collision_mask = 512
 script = ExtResource("1_bl3dr")
+resource = SubResource("Resource_bucd7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=725538783]
 

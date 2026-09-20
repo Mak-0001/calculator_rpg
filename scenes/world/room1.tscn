@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://byb4pgup73io2"]
 
 [ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_o6xkw"]
+[ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_r3iy5"]
 [ext_resource type="Texture2D" uid="uid://trfjvsv101ib" path="res://icon.svg" id="1_rkkm1"]
 [ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_qhaqp"]
+[ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_4iskc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1y6sv"]
 
 [node name="Room1" type="Node2D" unique_id=322616530]
+script = ExtResource("1_r3iy5")
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_o6xkw")]
 
@@ -17,13 +20,21 @@ texture = ExtResource("1_rkkm1")
 position = Vector2(181, -1)
 texture = ExtResource("1_rkkm1")
 
-[node name="Gate" parent="." unique_id=776249544 instance=ExtResource("3_qhaqp")]
-position = Vector2(1, 0)
-destination_level = "res://scenes/world/lobby.tscn"
+[node name="gates" type="Node" parent="." unique_id=2071274928]
 
-[node name="CollisionShape2D" parent="Gate" index="0" unique_id=725538783]
+[node name="Gate" parent="gates" unique_id=776249544 instance=ExtResource("3_qhaqp")]
+position = Vector2(1, 0)
+key_resource = ExtResource("5_4iskc")
+direction = 3
+
+[node name="CollisionShape2D" parent="gates/Gate" index="0" unique_id=725538783]
 position = Vector2(290, 4)
 shape = SubResource("RectangleShape2D_1y6sv")
 debug_color = Color(0.6456857, 0.5224494, 1.92523e-07, 0.41960785)
 
-[editable path="Gate"]
+[node name="SpawnPoint" parent="gates/Gate" index="1" unique_id=848420764]
+position = Vector2(243, 2)
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+
+[editable path="gates/Gate"]

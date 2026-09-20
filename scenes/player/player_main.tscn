@@ -107,3 +107,4 @@ sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"forward"
 
 [connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]

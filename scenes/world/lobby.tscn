@@ -1,27 +1,37 @@
 [gd_scene format=3 uid="uid://cw75pcaj34p20"]
 
+[ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_mn8lo"]
 [ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_u3nvq"]
 [ext_resource type="Texture2D" uid="uid://trfjvsv101ib" path="res://icon.svg" id="2_pasi8"]
 [ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_pwvnl"]
+[ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_krpwf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18ld8"]
 
 [node name="Lobby" type="Node2D" unique_id=713859746]
+script = ExtResource("1_mn8lo")
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_u3nvq")]
-position = Vector2(443, 189)
+position = Vector2(44, -34)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=637215518]
 z_index = -1
-position = Vector2(533, 178)
+position = Vector2(-83, -84)
 texture = ExtResource("2_pasi8")
 
-[node name="Gate" parent="." unique_id=776249544 instance=ExtResource("3_pwvnl")]
-position = Vector2(318, 199)
-destination_level = "res://scenes/world/room1.tscn"
+[node name="gates" type="Node" parent="." unique_id=1666838475]
 
-[node name="CollisionShape2D" parent="Gate" index="0" unique_id=725538783]
+[node name="Gate" parent="gates" unique_id=776249544 instance=ExtResource("3_pwvnl")]
+position = Vector2(-193, -50)
+key_resource = ExtResource("5_krpwf")
+
+[node name="CollisionShape2D" parent="gates/Gate" index="0" unique_id=725538783]
 shape = SubResource("RectangleShape2D_18ld8")
 debug_color = Color(0.9471006, 5.0055983e-06, 0.5870054, 0.41960785)
 
-[editable path="Gate"]
+[node name="SpawnPoint" parent="gates/Gate" index="1" unique_id=848420764]
+position = Vector2(-1, 28)
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+
+[editable path="gates/Gate"]
