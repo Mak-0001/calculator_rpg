@@ -1,3 +1,3 @@
 extends Node2D;
 
-var playerNode: playerMain = null;
+var playerNode: PlayerMain = null;

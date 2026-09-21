@@ -1,5 +1,5 @@
 extends Entity;
-class_name playerMain;
+class_name PlayerMain;
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D;
 
 #region enums

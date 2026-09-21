@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_o6xkw"]
 [ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_r3iy5"]
 [ext_resource type="Texture2D" uid="uid://trfjvsv101ib" path="res://icon.svg" id="1_rkkm1"]
+[ext_resource type="PackedScene" uid="uid://b3456871yuu6s" path="res://scenes/enemies_scenes/enemy_placeholder.tscn" id="2_cmstx"]
 [ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_qhaqp"]
 [ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_4iskc"]
 
@@ -10,6 +11,9 @@
 
 [node name="Room1" type="Node2D" unique_id=322616530]
 script = ExtResource("1_r3iy5")
+
+[node name="EnemyPlaceholder" parent="." unique_id=1448996320 instance=ExtResource("2_cmstx")]
+position = Vector2(243, 125)
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_o6xkw")]
 

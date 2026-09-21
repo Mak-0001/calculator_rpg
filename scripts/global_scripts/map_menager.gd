@@ -21,7 +21,6 @@ func go_to_level(_scene_path: String, door_tag: String = "") -> void:
 	
 	var state = ResourceLoader.load_threaded_request(scene_path, "", use_subthreads);
 	
-	#door_tag prześlij do GameMenager
 	if state == OK:
 		set_process(true);
 	

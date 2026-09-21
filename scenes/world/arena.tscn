@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bvbsmg5ghwvok"]
+
+[ext_resource type="Script" uid="uid://dsicro41qsiqc" path="res://scripts/world/arena.gd" id="1_ldtp4"]
+[ext_resource type="Script" uid="uid://cem73yjqklbfe" path="res://scripts/others/button_to_lobby.gd" id="1_pbd5s"]
+
+[node name="Arena" type="Node2D" unique_id=1077199473]
+script = ExtResource("1_ldtp4")
+
+[node name="SpritePlayer" type="Sprite2D" parent="." unique_id=900432345]
+position = Vector2(209, 323)
+
+[node name="SpriteEnemy" type="Sprite2D" parent="." unique_id=368038903]
+position = Vector2(888, 334)
+
+[node name="Button" type="Button" parent="." unique_id=2029232956]
+offset_right = 18.0
+offset_bottom = 31.0
+text = "X"
+script = ExtResource("1_pbd5s")
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

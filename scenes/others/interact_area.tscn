@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bw2jy27jk50n3"]
+
+[ext_resource type="Script" uid="uid://c3lb6tk7mw4pa" path="res://scripts/others/interact_area.gd" id="1_vk0wn"]
+
+[sub_resource type="Animation" id="Animation_vk0wn"]
+resource_name = "confirm_ask"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yyb7q"]
+_data = {
+&"confirm_ask": SubResource("Animation_vk0wn")
+}
+
+[node name="Area" type="Area2D" unique_id=1107595560]
+collision_layer = 8
+collision_mask = 512
+script = ExtResource("1_vk0wn")
+
+[node name="Label" type="Label" parent="." unique_id=1580928276]
+visible = false
+offset_left = -36.0
+offset_top = -55.0
+offset_right = 34.0
+offset_bottom = -32.0
+text = ">interact"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=820542872]
+libraries/ = SubResource("AnimationLibrary_yyb7q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=151938082]
+debug_color = Color(0.93333334, 0, 0, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="ready" from="." to="." method="_on_ready"]

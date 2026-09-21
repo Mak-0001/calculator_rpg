@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b3456871yuu6s"]
+
+[ext_resource type="Script" uid="uid://c0knta7plt0na" path="res://scripts/enemies_script/enemy_placeholder.gd" id="1_31ldk"]
+[ext_resource type="PackedScene" uid="uid://bw2jy27jk50n3" path="res://scenes/others/interact_area.tscn" id="2_vx872"]
+[ext_resource type="Texture2D" uid="uid://trfjvsv101ib" path="res://icon.svg" id="3_vx872"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(129, 129)
+
+[node name="EnemyPlaceholder" type="CharacterBody2D" unique_id=1448996320]
+script = ExtResource("1_31ldk")
+
+[node name="Area" parent="." unique_id=1107595560 instance=ExtResource("2_vx872")]
+
+[node name="CollisionShape2D" parent="Area" index="2" unique_id=151938082]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=943607901]
+modulate = Color(0.85147566, 0, 0.34242132, 1)
+texture = ExtResource("3_vx872")
+
+[connection signal="interact_now" from="Area" to="." method="_on_area_interact_now"]
+
+[editable path="Area"]
