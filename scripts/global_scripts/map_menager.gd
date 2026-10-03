@@ -30,11 +30,11 @@ func _process(_delta: float) -> void:
 	match load_status:
 		ResourceLoader.THREAD_LOAD_INVALID_RESOURCE, ResourceLoader.THREAD_LOAD_FAILED:
 			set_process(false);
-			#dodaj print błędu
 		ResourceLoader.THREAD_LOAD_LOADED:
 			var loaded = ResourceLoader.load_threaded_get(scene_path);
 			#await TransitionScript.show_folder_complete;
 			get_tree().change_scene_to_packed(loaded);
-			TransitionScript.show_folder("dir_placeholder");
+			var path = ResourceUID.ensure_path(scene_path);
+			TransitionScript.show_folder(path.right(-path.rfind("/") - 1).left(-5));
 			await get_tree().create_timer(0.5).timeout;
 			TransitionScript.fade_out(Color(0,0,255));

@@ -1,11 +1,17 @@
-[gd_scene format=3 uid="uid://byb4pgup73io2"]
+[gd_scene format=4 uid="uid://byb4pgup73io2"]
 
 [ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_o6xkw"]
 [ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_r3iy5"]
-[ext_resource type="Texture2D" uid="uid://trfjvsv101ib" path="res://icon.svg" id="1_rkkm1"]
 [ext_resource type="PackedScene" uid="uid://b3456871yuu6s" path="res://scenes/enemies_scenes/enemy_placeholder.tscn" id="2_cmstx"]
 [ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_qhaqp"]
+[ext_resource type="Script" uid="uid://dtsw0yp6uycmi" path="res://scripts/resources_templates/enemy_resource_template.gd" id="3_s4jst"]
 [ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_4iskc"]
+[ext_resource type="TileSet" uid="uid://cvtuwghernbhj" path="res://resources/tilemap_resources/tileset_v1.tres" id="7_s4jst"]
+
+[sub_resource type="Resource" id="Resource_cmstx"]
+script = ExtResource("3_s4jst")
+enemy_name = "Pimpuś"
+metadata/_custom_type_script = "uid://dtsw0yp6uycmi"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1y6sv"]
 
@@ -13,16 +19,11 @@
 script = ExtResource("1_r3iy5")
 
 [node name="EnemyPlaceholder" parent="." unique_id=1448996320 instance=ExtResource("2_cmstx")]
-position = Vector2(243, 125)
+position = Vector2(-344, -2)
+enemy_res_file = SubResource("Resource_cmstx")
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_o6xkw")]
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=605389172]
-texture = ExtResource("1_rkkm1")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=989230519]
-position = Vector2(181, -1)
-texture = ExtResource("1_rkkm1")
+position = Vector2(-149, 25)
 
 [node name="gates" type="Node" parent="." unique_id=2071274928]
 
@@ -38,6 +39,11 @@ debug_color = Color(0.6456857, 0.5224494, 1.92523e-07, 0.41960785)
 
 [node name="SpawnPoint" parent="gates/Gate" index="1" unique_id=848420764]
 position = Vector2(243, 2)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1194907461]
+z_index = -1
+tile_map_data = PackedByteArray("AAAJAP//AQADAAMAAAAJAAAAAQADAAUAAAAIAAAAAQACAAUAAAAIAP//AQACAAMAAAAHAAAAAQACAAUAAAAGAAAAAQACAAUAAAAFAAAAAQACAAUAAAAEAAAAAQACAAUAAAADAAAAAQACAAUAAAACAAAAAQACAAUAAAABAAAAAQACAAUAAAAAAAAAAQACAAQAAAAAAAEAAQADAAUAAAAHAP//AQACAAMAAAAGAP//AQACAAMAAAAFAP//AQACAAMAAAAEAP//AQACAAMAAAADAP//AQACAAMAAAACAP//AQACAAMAAAABAP//AQACAAMAAAAAAP//AQACAAQAAAAAAP7/AQADAAMAAAD///7/AQACAAMAAAD//wAAAQACAAQAAAD/////AQACAAQAAAD//wEAAQACAAUAAAD+//7/AQACAAMAAAD+////AQACAAQAAAD+/wAAAQACAAQAAAD+/wEAAQACAAUAAAD9/wEAAQACAAUAAAD9/wAAAQACAAQAAAD9////AQACAAQAAAD9//7/AQACAAMAAAD8//7/AQACAAMAAAD8////AQACAAQAAAD8/wAAAQACAAQAAAD8/wEAAQACAAUAAAD7/wEAAQACAAUAAAD7/wAAAQACAAQAAAD6/wAAAQACAAQAAAD6////AQACAAQAAAD6//7/AQACAAMAAAD7//7/AQACAAMAAAD7////AQACAAQAAAD5////AQACAAQAAAD5//7/AQACAAMAAAD4////AQACAAQAAAD4//7/AQACAAMAAAD3//7/AQACAAMAAAD2//7/AQACAAMAAAD2////AQACAAQAAAD3////AQACAAQAAAD4/wAAAQACAAQAAAD5/wAAAQACAAQAAAD6/wEAAQACAAUAAAD5/wEAAQACAAUAAAD4/wEAAQACAAUAAAD3/wEAAQACAAUAAAD2/wEAAQACAAUAAAD1/wEAAQACAAUAAAD1/wAAAQACAAQAAAD2/wAAAQACAAQAAAD3/wAAAQACAAQAAAD0/wEAAQACAAUAAADz/wEAAQACAAUAAADy/wEAAQABAAUAAADy/wAAAQABAAQAAADy////AQABAAQAAADy//7/AQABAAMAAADz//7/AQACAAMAAAD0//7/AQACAAMAAAD1//7/AQACAAMAAAD1////AQACAAQAAAD0////AQACAAQAAAD0/wAAAQACAAQAAADz/wAAAQACAAQAAADz////AQACAAQAAAA=")
+tile_set = ExtResource("7_s4jst")
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 

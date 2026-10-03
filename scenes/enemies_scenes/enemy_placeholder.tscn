@@ -9,6 +9,7 @@ size = Vector2(129, 129)
 
 [node name="EnemyPlaceholder" type="CharacterBody2D" unique_id=1448996320]
 script = ExtResource("1_31ldk")
+aligment = -1
 
 [node name="Area" parent="." unique_id=1107595560 instance=ExtResource("2_vx872")]
 
@@ -20,6 +21,13 @@ shape = SubResource("RectangleShape2D_g4v7s")
 modulate = Color(0.85147566, 0, 0.34242132, 1)
 texture = ExtResource("3_vx872")
 
-[connection signal="interact_now" from="Area" to="." method="_on_area_interact_now"]
+[node name="Timer" type="Timer" parent="." unique_id=259399165]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="player_entered" from="Area" to="." method="_on_area_player_entered"]
+[connection signal="player_exited" from="Area" to="." method="_on_area_player_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="Area"]

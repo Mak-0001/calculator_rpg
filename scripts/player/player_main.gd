@@ -10,11 +10,14 @@ const MAX_SPEED := 80.00;
 
 #endregion
 var curr_direction : POSS_DIRECTION;
+var can_interact: bool = true;
 
 #region basics
 func _on_ready() -> void:
 	GameMenager.playerNode = self;
 	SignalBus.room_changed.connect(enter_room);
+	SignalBus.battle_to_start.connect(battle_ready);
+	SignalBus.battle_to_end.connect(battle_over);
 
 func _on_tree_exited() -> void:
 	GameMenager.playerNode = null;
@@ -76,6 +79,18 @@ func anim_play() -> void:
 				animated_sprite_2d.flip_h = true;
 			_:
 				pass;
+
+#endregion
+#region battle
+func battle_ready(_enemy):
+	self.can_interact = false;
+	self.set_physics_process(false);
+	velocity = Vector2.ZERO;
+	anim_play();
+
+func battle_over():
+	self.can_interact = true;
+	self.set_physics_process(true);
 
 #endregion
 #region health

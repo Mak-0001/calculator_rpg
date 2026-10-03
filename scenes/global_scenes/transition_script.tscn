@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://eompumq42i81"]
 
-[ext_resource type="Script" uid="uid://dkd6xm5lpssbv" path="res://scripts/global_scripts/transition_script.gd" id="1_1y6sv"]
+[ext_resource type="Script" uid="uid://dkd6xm5lpssbv" path="res://scripts/global_scripts/transition_script.gd" id="1_ptl33"]
 
 [sub_resource type="Animation" id="Animation_7s7pl"]
 length = 0.001
@@ -85,7 +85,7 @@ _data = {
 }
 
 [node name="TransitionScript" type="CanvasLayer" unique_id=1472477741]
-script = ExtResource("1_1y6sv")
+script = ExtResource("1_ptl33")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2011123459]
 unique_name_in_owner = true

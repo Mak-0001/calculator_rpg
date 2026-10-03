@@ -5,7 +5,7 @@ extends CanvasLayer
 
 signal fade_in_complete;
 signal fade_out_complete;
-#signal show_folder_complete;
+signal show_folder_complete;
 
 func _on_ready() -> void:
 	dir_name.visible = false;
@@ -37,5 +37,5 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			fade_in_complete.emit();
 		"fade_out":
 			fade_out_complete.emit();
-		#"show_folder":
-			#show_folder_complete.emit();
+		"show_folder":
+			show_folder_complete.emit();

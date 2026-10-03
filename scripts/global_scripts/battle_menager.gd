@@ -1,16 +1,17 @@
 extends Node
 
 var arena: String = "res://scenes/world/arena.tscn";
-var arena_node: Node;
+var arena_node: CanvasLayer;
 var progress: Array = [];
 
 var player_res: Resource;
-var enemy_res: Resource;
+var enemy_res: EnemyFileResource;
 
 func _on_ready() -> void:
 	SignalBus.battle_to_start.connect(start_battle);
 
 func go_to_battle() -> void:
+	
 	TransitionScript.fade_in(Color(0,0,255));
 	await TransitionScript.fade_in_complete;
 	var state = ResourceLoader.load_threaded_request(arena, "", true);
@@ -18,7 +19,7 @@ func go_to_battle() -> void:
 	if state == OK:
 		set_process(true);
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var load_status = ResourceLoader.\
 		load_threaded_get_status(arena, progress);
 	match load_status:
@@ -27,10 +28,17 @@ func _process(delta: float) -> void:
 			#dodaj print błędu
 		ResourceLoader.THREAD_LOAD_LOADED:
 			var loaded = ResourceLoader.load_threaded_get(arena);
+			#get_tree().change_scene_to_packed(loaded);
 			#await TransitionScript.show_folder_complete;
-			get_tree().change_scene_to_packed(loaded);
+			if loaded:
+				var scene = loaded as PackedScene
+				if scene:
+					var instance = scene.instantiate()
+					get_tree().current_scene.add_child(instance)
+					SignalBus.battle_started.emit();
 
-func start_battle(_enemy_resource: Resource):
+func start_battle(_enemy: Enemy):
+	enemy_res = _enemy.enemy_res_file as EnemyFileResource;
 	go_to_battle();
 
 func set_battlefield():
@@ -39,7 +47,9 @@ func set_battlefield():
 	if(player_sprite and enemy_sprite):
 		player_sprite.texture = load("res://assets/sprites/calc1.png");
 		enemy_sprite.texture = load("res://icon.svg");
-	TransitionScript.show_folder("enemy_name_from_res");#(enenmy_res.enemy_name);
+	TransitionScript.show_folder(enemy_res.enemy_name);
 	await get_tree().create_timer(0.5).timeout;
 	TransitionScript.fade_out(Color(0,0,255));
+	await TransitionScript.fade_out_complete;
+	arena_node.layer = 1;
 	

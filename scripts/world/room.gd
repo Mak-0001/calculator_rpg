@@ -5,7 +5,7 @@ class_name room;
 
 func _on_ready() -> void:
 	if(MapMenager.dest_door == ""):
-		SignalBus.room_changed.emit(Vector2.ZERO, 2);
+		SignalBus.room_changed.emit(Vector2.ZERO, 2);#2 -> DIRECTION.Down
 		print("gate not defined");
 	else:
 		var door_path = "gates/" + MapMenager.dest_door;

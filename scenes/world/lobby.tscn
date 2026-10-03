@@ -1,30 +1,26 @@
-[gd_scene format=3 uid="uid://cw75pcaj34p20"]
+[gd_scene format=4 uid="uid://cw75pcaj34p20"]
 
 [ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_mn8lo"]
 [ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_u3nvq"]
-[ext_resource type="Texture2D" uid="uid://trfjvsv101ib" path="res://icon.svg" id="2_pasi8"]
 [ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_pwvnl"]
+[ext_resource type="TileSet" uid="uid://cvtuwghernbhj" path="res://resources/tilemap_resources/tileset_v1.tres" id="5_dgd82"]
 [ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_krpwf"]
+[ext_resource type="Texture2D" uid="uid://bh07fgnessbvr" path="res://assets/tilemap/tilemap_v1.png" id="6_dgd82"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18ld8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bucd7"]
 
-[node name="Lobby" type="Node2D" unique_id=713859746]
+[node name="huhuh" type="Node2D" unique_id=713859746]
 script = ExtResource("1_mn8lo")
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_u3nvq")]
 position = Vector2(44, -34)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=637215518]
-z_index = -1
-position = Vector2(-83, -84)
-texture = ExtResource("2_pasi8")
-
 [node name="gates" type="Node" parent="." unique_id=1666838475]
 
 [node name="Gate" parent="gates" unique_id=776249544 instance=ExtResource("3_pwvnl")]
-position = Vector2(89, -34)
+position = Vector2(97, -33)
 key_resource = ExtResource("5_krpwf")
 direction = 2
 ask_player = true
@@ -38,6 +34,17 @@ position = Vector2(-1, 28)
 
 [node name="CollisionShape2D" parent="gates/Gate/Area" parent_id_path=PackedInt32Array(776249544, 1107595560) index="2" unique_id=151938082]
 shape = SubResource("RectangleShape2D_bucd7")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1149125873]
+z_index = -1
+tile_map_data = PackedByteArray("AAACAP7/AQACAAAAAAACAP//AQACAAEAAAADAP//AQADAAEAAAADAP7/AQADAAAAAAACAAAAAQACAAEAAAADAAAAAQADAAEAAAABAAAAAQACAAEAAAABAP//AQACAAEAAAABAP7/AQACAAAAAAAAAAAAAQACAAEAAAAAAP//AQACAAEAAAAAAP7/AQACAAAAAAD///7/AQACAAAAAAD/////AQACAAEAAAD//wAAAQACAAEAAAD//wEAAQACAAIAAAAAAAEAAQACAAIAAAABAAEAAQACAAIAAAACAAEAAQACAAIAAAADAAEAAQADAAIAAAD+/wEAAQACAAIAAAD9/wEAAQACAAIAAAD8/wEAAQABAAIAAAD8/wAAAQABAAEAAAD8////AQABAAEAAAD8//7/AQABAAAAAAD9//7/AQACAAAAAAD+//7/AQACAAAAAAD+////AQACAAEAAAD9////AQACAAEAAAD9/wAAAQACAAEAAAD+/wAAAQACAAEAAAA=")
+tile_set = ExtResource("5_dgd82")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=142539293]
+position = Vector2(-56, -32)
+texture = ExtResource("6_dgd82")
+region_enabled = true
+region_rect = Rect2(192, 32, 96, 64)
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 
