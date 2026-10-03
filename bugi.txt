@@ -1,0 +1,5 @@
+1. jeśli przeciwnik pokrywa domyślną pozycję gracza w pomieszczeniu, gra chce wejść w walkę:
+		a) dodawać gracza dynamicznie (jeszcze niesprawdzone)
+		b) zablokowć interakcje do końca efektu mgły (blokuje przy starcie projektu, gdy nie ma magły)
+		c) nie pokrywać domyślnej pozycji gracza z przeciwnikiem
+>Marcel

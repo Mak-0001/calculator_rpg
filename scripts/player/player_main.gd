@@ -12,6 +12,16 @@ const MAX_SPEED := 80.00;
 var curr_direction : POSS_DIRECTION;
 var can_interact: bool = true;
 
+@export var max_health: int = 10:
+	set(value):
+		current_health = value;
+		max_health = value;
+var current_health: int: 
+	set(value):
+		current_health = clamp(value, 0 , max_health);
+		if(value <= 0):
+			die();
+
 #region basics
 func _on_ready() -> void:
 	GameMenager.playerNode = self;
@@ -95,4 +105,5 @@ func battle_over():
 #endregion
 #region health
 func die() -> void:
-	print("player died")
+	SignalBus.battle_to_end.emit();
+	current_health = max_health;

@@ -5,6 +5,7 @@ var arena_node: CanvasLayer;
 var progress: Array = [];
 
 var player_res: Resource;
+var enemy_node: Enemy;
 var enemy_res: EnemyFileResource;
 
 func _on_ready() -> void:
@@ -38,12 +39,16 @@ func _process(_delta: float) -> void:
 					SignalBus.battle_started.emit();
 
 func start_battle(_enemy: Enemy):
-	enemy_res = _enemy.enemy_res_file as EnemyFileResource;
+	enemy_node = _enemy;
 	go_to_battle();
 
-func set_battlefield():
-	var player_sprite = arena_node.find_child("SpritePlayer") as Sprite2D;
-	var enemy_sprite = arena_node.find_child("SpriteEnemy") as Sprite2D;
+func arena_ready(arena_node_temp: CanvasLayer):
+	arena_node = arena_node_temp as Arena;
+	arena_node.set_battlefield(GameMenager.playerNode, enemy_node)
+
+func set_battlefield(): #useless
+	var player_sprite = arena_node.find_child("SpritePlayer") as TextureRect;
+	var enemy_sprite = arena_node.find_child("SpriteEnemy") as TextureRect;
 	if(player_sprite and enemy_sprite):
 		player_sprite.texture = load("res://assets/sprites/calc1.png");
 		enemy_sprite.texture = load("res://icon.svg");

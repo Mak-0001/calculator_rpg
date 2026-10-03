@@ -5,6 +5,8 @@ var player_here:bool = false;
 
 func _on_ready() -> void:
 	set_process(false);
+	#enemy_icon_path = ($Sprite2D.texture as Texture2D).resource_path;
+	connect_enemy_icon_path($Sprite2D.texture);
 	match aligment:
 		ALIGMENT.FRIENDLY:
 			pass

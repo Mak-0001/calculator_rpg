@@ -1,0 +1,11 @@
+Maks:
+	grafiki klas >Marcel
+	ogólnie grafiki >Kolektyw
+	
+Michał:
+	tworzenie przeciwników >Marcel (poczekaj, aż skończę szkielet systemu walki)
+	
+Marcel:
+	szkielet systemu walki
+	dialog
+	zapis

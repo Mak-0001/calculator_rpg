@@ -19,11 +19,10 @@ metadata/_custom_type_script = "uid://dtsw0yp6uycmi"
 script = ExtResource("1_r3iy5")
 
 [node name="EnemyPlaceholder" parent="." unique_id=1448996320 instance=ExtResource("2_cmstx")]
-position = Vector2(-344, -2)
+position = Vector2(-127, 1)
 enemy_res_file = SubResource("Resource_cmstx")
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_o6xkw")]
-position = Vector2(-149, 25)
 
 [node name="gates" type="Node" parent="." unique_id=2071274928]
 
