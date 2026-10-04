@@ -6,14 +6,8 @@ var player_here:bool = false;
 func _on_ready() -> void:
 	set_process(false);
 	#enemy_icon_path = ($Sprite2D.texture as Texture2D).resource_path;
-	connect_enemy_icon_path($Sprite2D.texture);
-	match aligment:
-		ALIGMENT.FRIENDLY:
-			pass
-		ALIGMENT.NEUTRAL:
-			area.interact_now.connect(start_battle);
-		ALIGMENT.AGGRESIVE, ALIGMENT.TOTAL_AGGRESSIVE:
-			area.player_interact.connect(start_battle)
+	connect_icon_text($Sprite2D.texture);
+	connect_interaction(area);
 
 func _on_area_player_entered() -> void:
 	player_here = true

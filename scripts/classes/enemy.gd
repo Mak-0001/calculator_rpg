@@ -9,16 +9,22 @@ class_name Enemy;
 		max_health = enemy_res_file.enemy_max_health
 		current_health = enemy_res_file.enemy_max_health
 @export var aligment: ALIGMENT;
-var enemy_icon_path: String;
-var max_health: int;
-var current_health: int:
-	set(value):
-		current_health = value;
 
 func start_battle() -> void:
 	SignalBus.battle_to_start.emit(
 		self
 	);
 
-func connect_enemy_icon_path(texture_res: Texture2D):
-	enemy_icon_path = texture_res.resource_path
+func my_turn():
+	var att_ind = randi_range(0, len(ability_list) - 1);
+	return ability_list[att_ind];
+
+func connect_interaction(area: InteractArea):
+	match aligment:
+		ALIGMENT.FRIENDLY:
+			pass
+		ALIGMENT.NEUTRAL:
+			area.interact_now.connect(start_battle);
+		ALIGMENT.AGGRESIVE, ALIGMENT.TOTAL_AGGRESSIVE:
+			area.player_interact.connect(start_battle);
+			

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EnemyFileResource" format=3 uid="uid://bdc33rxcnghuf"]
+
+[ext_resource type="Script" uid="uid://dtsw0yp6uycmi" path="res://scripts/resources_templates/enemy_resource_template.gd" id="1_rcnpk"]
+
+[resource]
+script = ExtResource("1_rcnpk")
+enemy_name = "Pimpuś"
+metadata/_custom_type_script = "uid://dtsw0yp6uycmi"

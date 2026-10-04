@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://badxoxq6mdagg"]
+
+[ext_resource type="Script" uid="uid://bs4m0lrsamkjo" path="res://resources/abilities/run_away_script.gd" id="1_25nx1"]
+[ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="2_8it7h"]
+
+[resource]
+script = ExtResource("2_8it7h")
+ability_name = "Ucieczka"
+ability_script = ExtResource("1_25nx1")
+metadata/_custom_type_script = "uid://bg6p80306oe5c"

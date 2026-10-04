@@ -8,7 +8,12 @@ var player_res: Resource;
 var enemy_node: Enemy;
 var enemy_res: EnemyFileResource;
 
+var attack_instance: Object;
+
+enum WHOSE_TURN {PLAYER = 1, ENEMY = 0, OTHER = -1};
+
 func _on_ready() -> void:
+	attack_instance = Object.new();
 	SignalBus.battle_to_start.connect(start_battle);
 
 func go_to_battle() -> void:
@@ -57,4 +62,3 @@ func set_battlefield(): #useless
 	TransitionScript.fade_out(Color(0,0,255));
 	await TransitionScript.fade_out_complete;
 	arena_node.layer = 1;
-	

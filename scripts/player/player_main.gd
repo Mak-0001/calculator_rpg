@@ -12,18 +12,10 @@ const MAX_SPEED := 80.00;
 var curr_direction : POSS_DIRECTION;
 var can_interact: bool = true;
 
-@export var max_health: int = 10:
-	set(value):
-		current_health = value;
-		max_health = value;
-var current_health: int: 
-	set(value):
-		current_health = clamp(value, 0 , max_health);
-		if(value <= 0):
-			die();
 
 #region basics
 func _on_ready() -> void:
+	connect_icon_path("res://assets/sprites/calc1.png");
 	GameMenager.playerNode = self;
 	SignalBus.room_changed.connect(enter_room);
 	SignalBus.battle_to_start.connect(battle_ready);

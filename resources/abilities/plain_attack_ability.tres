@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://cu3ocbusljbjw"]
+
+[ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="1_td2gp"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_td2gp")
+ability_name = "Zwykły atak"
+min_damage = 2
+max_damage = 4
+metadata/_custom_type_script = "uid://bg6p80306oe5c"
