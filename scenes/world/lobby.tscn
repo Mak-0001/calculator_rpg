@@ -2,10 +2,20 @@
 
 [ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_mn8lo"]
 [ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_u3nvq"]
+[ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="3_nqtym"]
 [ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_pwvnl"]
+[ext_resource type="Resource" uid="uid://badxoxq6mdagg" path="res://resources/abilities/run_away_ability.tres" id="4_vihsx"]
 [ext_resource type="TileSet" uid="uid://cvtuwghernbhj" path="res://resources/tilemap_resources/tileset_v1.tres" id="5_dgd82"]
 [ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_krpwf"]
 [ext_resource type="Texture2D" uid="uid://bh07fgnessbvr" path="res://assets/tilemap/tilemap_v1.png" id="6_dgd82"]
+
+[sub_resource type="Resource" id="Resource_inltv"]
+resource_local_to_scene = true
+script = ExtResource("3_nqtym")
+ability_name = "Zwykły atak"
+min_damage = 2
+max_damage = 4
+metadata/_custom_type_script = "uid://bg6p80306oe5c"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18ld8"]
 
@@ -16,6 +26,7 @@ script = ExtResource("1_mn8lo")
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_u3nvq")]
 position = Vector2(44, -34)
+ability_list = Array[ExtResource("3_nqtym")]([ExtResource("4_vihsx"), SubResource("Resource_inltv")])
 
 [node name="gates" type="Node" parent="." unique_id=1666838475]
 

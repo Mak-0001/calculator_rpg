@@ -1,6 +1,6 @@
-extends Object;
+extends GDScript;
 class_name AbilityScript;
 
-func main(source: Ability) -> int:
+static func main(source: Ability) -> int:
 	print(source.ability_name + ": " + str(source.min_damage));
-	return 0;
+	return source.min_damage;

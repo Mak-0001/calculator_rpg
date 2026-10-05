@@ -15,9 +15,16 @@ func start_battle() -> void:
 		self
 	);
 
-func my_turn():
+func my_turn() -> Callable:
+	if(len(ability_list) <= 0):
+		return empty_turn;
 	var att_ind = randi_range(0, len(ability_list) - 1);
-	return ability_list[att_ind];
+	return ability_list[att_ind].ability_main;
+
+func empty_turn():
+	print("empty turn")
+	SignalBus.end_my_turn.emit();
+	return 0;
 
 func connect_interaction(area: InteractArea):
 	match aligment:
@@ -27,4 +34,3 @@ func connect_interaction(area: InteractArea):
 			area.interact_now.connect(start_battle);
 		ALIGMENT.AGGRESIVE, ALIGMENT.TOTAL_AGGRESSIVE:
 			area.player_interact.connect(start_battle);
-			

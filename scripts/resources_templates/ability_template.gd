@@ -9,13 +9,8 @@ class_name Ability;
 @export var extra: Dictionary;
 @export var ability_script: Script;
 
-var attack_instance: Object;
-
 func ability_main() -> int:
-	attack_instance = Object.new();
 	if(ability_script):
-		attack_instance.set_script(ability_script);
+		return ability_script.main(self);
 	else:
-		attack_instance.set_script(AbilityScript.new().get_script());
-	var output: int = (attack_instance as AbilityScript).main(self);
-	return output;
+		return AbilityScript.main(self);

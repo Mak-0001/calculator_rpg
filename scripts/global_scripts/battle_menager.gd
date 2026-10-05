@@ -4,17 +4,42 @@ var arena: String = "res://scenes/world/arena.tscn";
 var arena_node: CanvasLayer;
 var progress: Array = [];
 
-var player_res: Resource;
-var enemy_node: Enemy;
-var enemy_res: EnemyFileResource;
+#var player_res: Resource;
+var nodes_in_battle: Array[Entity];
+#var enemy_res: EnemyFileResource;
 
-var attack_instance: Object;
+enum WHOSE_TURN {PLAYER = 0, ENEMY = 1, OTHER = -1, NONE = -2};
+var turn_of: WHOSE_TURN = WHOSE_TURN.NONE;
+var turn_index: int:
+	set(value):
+		value = value % (len(nodes_in_battle) if len(nodes_in_battle) != 0 else 1);
+		if(value == 0 or value == -1):
+			turn_of = value as WHOSE_TURN;
+			if(value == 0):
+				SignalBus.next_turn.emit();
+		elif(value > 0):
+			turn_of = 1 as WHOSE_TURN;
+		else:
+			turn_of = WHOSE_TURN.NONE;
+		turn_index = value;
 
-enum WHOSE_TURN {PLAYER = 1, ENEMY = 0, OTHER = -1};
+enum BATTLE_STATE {LOADING = 0, IN_PROGRESS = 1, OFF = -1};
+var state_of_battle: BATTLE_STATE;
+
 
 func _on_ready() -> void:
-	attack_instance = Object.new();
 	SignalBus.battle_to_start.connect(start_battle);
+	SignalBus.battle_to_end.connect(func(): 
+		nodes_in_battle.clear();
+		turn_of = WHOSE_TURN.NONE;
+		state_of_battle = BATTLE_STATE.OFF;
+		set_process(false);
+	);
+	SignalBus.end_my_turn.connect(func(): turn_index+=1);
+	SignalBus.next_turn.connect(func():
+		for ent in nodes_in_battle:
+			ent.action_count = ent.actions_per_turn;
+		)
 
 func go_to_battle() -> void:
 	
@@ -23,42 +48,65 @@ func go_to_battle() -> void:
 	var state = ResourceLoader.load_threaded_request(arena, "", true);
 	
 	if state == OK:
+		state_of_battle = BATTLE_STATE.LOADING;
 		set_process(true);
 	
 func _process(_delta: float) -> void:
-	var load_status = ResourceLoader.\
-		load_threaded_get_status(arena, progress);
-	match load_status:
-		ResourceLoader.THREAD_LOAD_INVALID_RESOURCE, ResourceLoader.THREAD_LOAD_FAILED:
-			set_process(false);
-			#dodaj print błędu
-		ResourceLoader.THREAD_LOAD_LOADED:
-			var loaded = ResourceLoader.load_threaded_get(arena);
-			#get_tree().change_scene_to_packed(loaded);
-			#await TransitionScript.show_folder_complete;
-			if loaded:
-				var scene = loaded as PackedScene
-				if scene:
-					var instance = scene.instantiate()
-					get_tree().current_scene.add_child(instance)
-					SignalBus.battle_started.emit();
+	if(state_of_battle == BATTLE_STATE.IN_PROGRESS):
+		if(turn_of != WHOSE_TURN.PLAYER):
+			for i in range(1, len(nodes_in_battle)):
+				handle_single_turn(nodes_in_battle[i].my_turn(), 0);
+				turn_index+=1;
+	
+	if(state_of_battle == BATTLE_STATE.LOADING):
+		var load_status = ResourceLoader.\
+			load_threaded_get_status(arena, progress);
+		match load_status:
+			ResourceLoader.THREAD_LOAD_INVALID_RESOURCE, ResourceLoader.THREAD_LOAD_FAILED:
+				set_process(false);
+				state_of_battle = BATTLE_STATE.OFF;
+			ResourceLoader.THREAD_LOAD_LOADED:
+				var loaded = ResourceLoader.load_threaded_get(arena);
+				#get_tree().change_scene_to_packed(loaded);
+				#await TransitionScript.show_folder_complete;
+				if loaded:
+					var scene = loaded as PackedScene
+					if scene:
+						var instance = scene.instantiate()
+						get_tree().current_scene.add_child(instance)
+						SignalBus.battle_started.emit();
 
 func start_battle(_enemy: Enemy):
-	enemy_node = _enemy;
+	nodes_in_battle.append(GameMenager.playerNode);
+	nodes_in_battle.append(_enemy);
+	turn_of = WHOSE_TURN.PLAYER;
+	turn_index = 0;
 	go_to_battle();
 
 func arena_ready(arena_node_temp: CanvasLayer):
 	arena_node = arena_node_temp as Arena;
-	arena_node.set_battlefield(GameMenager.playerNode, enemy_node)
+	arena_node.set_battlefield(
+		GameMenager.playerNode, 
+		nodes_in_battle.slice(1,len(nodes_in_battle))
+	);
+	state_of_battle = BATTLE_STATE.IN_PROGRESS;
+	set_process(true);
 
-func set_battlefield(): #useless
-	var player_sprite = arena_node.find_child("SpritePlayer") as TextureRect;
-	var enemy_sprite = arena_node.find_child("SpriteEnemy") as TextureRect;
-	if(player_sprite and enemy_sprite):
-		player_sprite.texture = load("res://assets/sprites/calc1.png");
-		enemy_sprite.texture = load("res://icon.svg");
-	TransitionScript.show_folder(enemy_res.enemy_name);
-	await get_tree().create_timer(0.5).timeout;
-	TransitionScript.fade_out(Color(0,0,255));
-	await TransitionScript.fade_out_complete;
-	arena_node.layer = 1;
+
+func handle_single_turn(_ability: Callable, target_ind: int):
+	var output = _ability.call();
+	match turn_of:
+		WHOSE_TURN.PLAYER:
+			deal_damage_to(target_ind, output);
+			turn_index+=1;
+		WHOSE_TURN.ENEMY:
+			deal_damage_to(target_ind, output);
+		WHOSE_TURN.NONE:
+			pass;
+		_:
+			pass;
+
+func deal_damage_to(target_index: int, damage: int) -> void:
+	var target: Entity = nodes_in_battle[target_index];
+	target.take_damage(damage);
+	SignalBus.update_battle_info.emit(target_index);

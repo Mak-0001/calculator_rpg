@@ -8,6 +8,10 @@ signal room_changed(pos: Vector2, dir: int);
 signal battle_to_start(enemy: Enemy);
 signal battle_started();
 signal battle_to_end();
+
+signal update_battle_info(vol: int);
+signal next_turn();
+signal end_my_turn();
 #endregion
 
 

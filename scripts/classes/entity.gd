@@ -19,19 +19,28 @@ var current_health: int = 10:
 		if(value <= 0):
 			die();
 
-var action_count: int;
-var actions_per_turn: int = 1;
+var action_count: int:
+	set(value):
+		if(value <= 0):
+			SignalBus.end_turn.emit(self);
+		action_count = value;
+const actions_per_turn: int = 1;
 
 var icon_path: String;
 
-func connect_icon_text(texture_res: Texture2D):
+func connect_icon_text(texture_res: Texture2D) -> void:
 	icon_path = texture_res.resource_path;
 	
-func connect_icon_path(texture_res: String):
+func connect_icon_path(texture_res: String) -> void:
 	icon_path = texture_res;
 
 func my_turn():
 	pass
 
+func take_damage(dam: int) -> void:
+	current_health -= dam;
+
 func die():
-	print("I died");
+	SignalBus.battle_to_end.emit();
+	print(self.name + " died");
+	queue_free();

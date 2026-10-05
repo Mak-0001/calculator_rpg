@@ -15,6 +15,7 @@ func _on_area_player_entered() -> void:
 
 func _on_area_player_exited() -> void:
 	player_here = false
+	($Timer as Timer).stop()
 	set_process(false)
 
 func _process(_delta: float) -> void:
