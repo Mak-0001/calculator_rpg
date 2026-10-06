@@ -8,6 +8,7 @@ class_name Enemy;
 		enemy_res_file = value;
 		max_health = enemy_res_file.enemy_max_health
 		current_health = enemy_res_file.enemy_max_health
+		actions_per_turn = enemy_res_file.enemy_max_action;
 @export var aligment: ALIGMENT;
 
 func start_battle() -> void:
@@ -19,12 +20,8 @@ func my_turn() -> Callable:
 	if(len(ability_list) <= 0):
 		return empty_turn;
 	var att_ind = randi_range(0, len(ability_list) - 1);
+	action_count -= ability_list[att_ind].ability_cost;
 	return ability_list[att_ind].ability_main;
-
-func empty_turn():
-	print("empty turn")
-	SignalBus.end_my_turn.emit();
-	return 0;
 
 func connect_interaction(area: InteractArea):
 	match aligment:

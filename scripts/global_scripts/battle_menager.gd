@@ -13,6 +13,7 @@ var turn_of: WHOSE_TURN = WHOSE_TURN.NONE;
 var turn_index: int:
 	set(value):
 		value = value % (len(nodes_in_battle) if len(nodes_in_battle) != 0 else 1);
+		print("value==", value);
 		if(value == 0 or value == -1):
 			turn_of = value as WHOSE_TURN;
 			if(value == 0):
@@ -35,10 +36,16 @@ func _on_ready() -> void:
 		state_of_battle = BATTLE_STATE.OFF;
 		set_process(false);
 	);
-	SignalBus.end_my_turn.connect(func(): turn_index+=1);
+	SignalBus.end_my_turn.connect(func(): 
+		turn_index+=1;
+		#await get_tree().create_timer(1).timeout;
+		set_process(true);
+	);
 	SignalBus.next_turn.connect(func():
+		print("===END OF TURN===");
 		for ent in nodes_in_battle:
 			ent.action_count = ent.actions_per_turn;
+		SignalBus.update_battle_info.emit();
 		)
 
 func go_to_battle() -> void:
@@ -54,9 +61,9 @@ func go_to_battle() -> void:
 func _process(_delta: float) -> void:
 	if(state_of_battle == BATTLE_STATE.IN_PROGRESS):
 		if(turn_of != WHOSE_TURN.PLAYER):
-			for i in range(1, len(nodes_in_battle)):
-				handle_single_turn(nodes_in_battle[i].my_turn(), 0);
-				turn_index+=1;
+			set_process(false);
+			await get_tree().create_timer(2).timeout;
+			handle_single_turn(nodes_in_battle[turn_index].my_turn(), 0);
 	
 	if(state_of_battle == BATTLE_STATE.LOADING):
 		var load_status = ResourceLoader.\
@@ -67,8 +74,6 @@ func _process(_delta: float) -> void:
 				state_of_battle = BATTLE_STATE.OFF;
 			ResourceLoader.THREAD_LOAD_LOADED:
 				var loaded = ResourceLoader.load_threaded_get(arena);
-				#get_tree().change_scene_to_packed(loaded);
-				#await TransitionScript.show_folder_complete;
 				if loaded:
 					var scene = loaded as PackedScene
 					if scene:
@@ -94,19 +99,13 @@ func arena_ready(arena_node_temp: CanvasLayer):
 
 
 func handle_single_turn(_ability: Callable, target_ind: int):
+	print((nodes_in_battle[turn_index].name) + ": ");
 	var output = _ability.call();
-	match turn_of:
-		WHOSE_TURN.PLAYER:
-			deal_damage_to(target_ind, output);
-			turn_index+=1;
-		WHOSE_TURN.ENEMY:
-			deal_damage_to(target_ind, output);
-		WHOSE_TURN.NONE:
-			pass;
-		_:
-			pass;
+	if(output >= 0):
+		deal_damage_to(target_ind, output);
+	SignalBus.update_battle_info.emit();
+
 
 func deal_damage_to(target_index: int, damage: int) -> void:
 	var target: Entity = nodes_in_battle[target_index];
 	target.take_damage(damage);
-	SignalBus.update_battle_info.emit(target_index);

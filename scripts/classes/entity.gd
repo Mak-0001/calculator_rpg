@@ -22,9 +22,9 @@ var current_health: int = 10:
 var action_count: int:
 	set(value):
 		if(value <= 0):
-			SignalBus.end_turn.emit(self);
+			SignalBus.end_my_turn.emit();
 		action_count = value;
-const actions_per_turn: int = 1;
+var actions_per_turn: int = 2;
 
 var icon_path: String;
 
@@ -34,8 +34,20 @@ func connect_icon_text(texture_res: Texture2D) -> void:
 func connect_icon_path(texture_res: String) -> void:
 	icon_path = texture_res;
 
+func update_action_count(val: int) -> void:
+	if(val < 0):
+		action_count += val;
+	elif(val == 1):
+		action_count = actions_per_turn;
+
 func my_turn():
 	pass
+
+func empty_turn():
+	print("empty turn")
+	action_count = 0;
+	#SignalBus.end_my_turn.emit();
+	return 0;
 
 func take_damage(dam: int) -> void:
 	current_health -= dam;
