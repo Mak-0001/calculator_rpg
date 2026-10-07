@@ -1,16 +1,20 @@
 [gd_scene format=3 uid="uid://b3456871yuu6s"]
 
 [ext_resource type="Script" uid="uid://c0knta7plt0na" path="res://scripts/enemies_script/enemy_placeholder.gd" id="1_31ldk"]
-[ext_resource type="Resource" uid="uid://bdc33rxcnghuf" path="res://resources/enemy_resource/enemy_placeholder_res.tres" id="2_gyood"]
+[ext_resource type="Script" uid="uid://dtsw0yp6uycmi" path="res://scripts/resources_templates/enemy_resource_template.gd" id="2_8skoy"]
 [ext_resource type="PackedScene" uid="uid://bw2jy27jk50n3" path="res://scenes/others/interact_area.tscn" id="2_vx872"]
 [ext_resource type="Texture2D" uid="uid://trfjvsv101ib" path="res://icon.svg" id="3_vx872"]
+
+[sub_resource type="Resource" id="Resource_e5y35"]
+script = ExtResource("2_8skoy")
+metadata/_custom_type_script = "uid://dtsw0yp6uycmi"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(129, 129)
 
 [node name="EnemyPlaceholder" type="CharacterBody2D" unique_id=1448996320]
 script = ExtResource("1_31ldk")
-enemy_res_file = ExtResource("2_gyood")
+enemy_res_file = SubResource("Resource_e5y35")
 aligment = -1
 
 [node name="Area" parent="." unique_id=1107595560 instance=ExtResource("2_vx872")]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blcxpbfigbtek" path="res://scripts/others/gate.gd" id="1_bl3dr"]
 [ext_resource type="PackedScene" uid="uid://bw2jy27jk50n3" path="res://scenes/others/interact_area.tscn" id="2_18ld8"]
+[ext_resource type="Texture2D" uid="uid://diurgaqrpeul8" path="res://assets/others/folder_icon.png" id="3_bucd7"]
 
 [node name="Gate" type="Area2D" unique_id=776249544]
 collision_layer = 4
@@ -15,6 +16,21 @@ ask_player = null
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=848420764]
 
 [node name="Area" parent="." unique_id=1107595560 instance=ExtResource("2_18ld8")]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1003261326]
+custom_maximum_size = Vector2(32, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bucd7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="interact_now" from="Area" to="." method="_on_area_interact_now"]

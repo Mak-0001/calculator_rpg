@@ -47,7 +47,7 @@ func empty_turn():
 	print("empty turn")
 	action_count = 0;
 	#SignalBus.end_my_turn.emit();
-	return 0;
+	return -1;
 
 func take_damage(dam: int) -> void:
 	current_health -= dam;

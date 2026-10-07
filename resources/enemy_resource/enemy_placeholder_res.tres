@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_rcnpk")
 enemy_name = "Pimpuś"
+enemy_max_action = 3
 metadata/_custom_type_script = "uid://dtsw0yp6uycmi"

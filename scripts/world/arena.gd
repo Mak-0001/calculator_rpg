@@ -2,6 +2,7 @@ extends CanvasLayer
 class_name Arena
 
 @onready var player_options: GridContainer = %PlayerOptions
+@onready var turn_banner: Label = %turn_banner
 
 var player: PlayerMain;
 var enemy: Enemy;

@@ -9,11 +9,14 @@ var nodes_in_battle: Array[Entity];
 #var enemy_res: EnemyFileResource;
 
 enum WHOSE_TURN {PLAYER = 0, ENEMY = 1, OTHER = -1, NONE = -2};
-var turn_of: WHOSE_TURN = WHOSE_TURN.NONE;
+var turn_of: WHOSE_TURN = WHOSE_TURN.NONE:
+	set(value):
+		turn_of = value;
+		if(arena_node):
+			(arena_node.turn_banner as Label).text = str(turn_of as int);
 var turn_index: int:
 	set(value):
 		value = value % (len(nodes_in_battle) if len(nodes_in_battle) != 0 else 1);
-		print("value==", value);
 		if(value == 0 or value == -1):
 			turn_of = value as WHOSE_TURN;
 			if(value == 0):
@@ -90,6 +93,7 @@ func start_battle(_enemy: Enemy):
 
 func arena_ready(arena_node_temp: CanvasLayer):
 	arena_node = arena_node_temp as Arena;
+	(arena_node.turn_banner as Label).text = str(turn_of as int);
 	arena_node.set_battlefield(
 		GameMenager.playerNode, 
 		nodes_in_battle.slice(1,len(nodes_in_battle))

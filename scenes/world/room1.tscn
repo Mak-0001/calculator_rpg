@@ -4,9 +4,18 @@
 [ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_r3iy5"]
 [ext_resource type="PackedScene" uid="uid://b3456871yuu6s" path="res://scenes/enemies_scenes/enemy_placeholder.tscn" id="2_cmstx"]
 [ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_qhaqp"]
-[ext_resource type="Resource" uid="uid://bdc33rxcnghuf" path="res://resources/enemy_resource/enemy_placeholder_res.tres" id="3_s4jst"]
+[ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="4_e5y35"]
 [ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_4iskc"]
+[ext_resource type="Resource" uid="uid://badxoxq6mdagg" path="res://resources/abilities/run_away_ability.tres" id="5_q6a4c"]
 [ext_resource type="TileSet" uid="uid://cvtuwghernbhj" path="res://resources/tilemap_resources/tileset_v1.tres" id="7_s4jst"]
+
+[sub_resource type="Resource" id="Resource_jl2wn"]
+resource_local_to_scene = true
+script = ExtResource("4_e5y35")
+ability_name = "Zwykły atak"
+min_damage = 2
+max_damage = 4
+metadata/_custom_type_script = "uid://bg6p80306oe5c"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1y6sv"]
 
@@ -15,24 +24,24 @@ script = ExtResource("1_r3iy5")
 
 [node name="EnemyPlaceholder" parent="." unique_id=1448996320 instance=ExtResource("2_cmstx")]
 position = Vector2(-127, 1)
-enemy_res_file = ExtResource("3_s4jst")
+aligment = 0
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_o6xkw")]
+ability_list = Array[ExtResource("4_e5y35")]([ExtResource("5_q6a4c"), SubResource("Resource_jl2wn")])
 
 [node name="gates" type="Node" parent="." unique_id=2071274928]
 
 [node name="Gate" parent="gates" unique_id=776249544 instance=ExtResource("3_qhaqp")]
-position = Vector2(1, 0)
+position = Vector2(282, -6)
 key_resource = ExtResource("5_4iskc")
 direction = 3
 
 [node name="CollisionShape2D" parent="gates/Gate" index="0" unique_id=725538783]
-position = Vector2(290, 4)
 shape = SubResource("RectangleShape2D_1y6sv")
 debug_color = Color(0.6456857, 0.5224494, 1.92523e-07, 0.41960785)
 
 [node name="SpawnPoint" parent="gates/Gate" index="1" unique_id=848420764]
-position = Vector2(243, 2)
+position = Vector2(-49, 5)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1194907461]
 z_index = -1

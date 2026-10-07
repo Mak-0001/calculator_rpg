@@ -2,7 +2,6 @@ extends Entity;
 
 class_name Enemy;
 
-
 @export var enemy_res_file: EnemyFileResource:
 	set(value):
 		enemy_res_file = value;
@@ -22,6 +21,11 @@ func my_turn() -> Callable:
 	var att_ind = randi_range(0, len(ability_list) - 1);
 	action_count -= ability_list[att_ind].ability_cost;
 	return ability_list[att_ind].ability_main;
+
+func die():
+	SignalBus.battle_to_end.emit();
+	print(enemy_res_file.enemy_name + " died");
+	queue_free();
 
 func connect_interaction(area: InteractArea):
 	match aligment:
