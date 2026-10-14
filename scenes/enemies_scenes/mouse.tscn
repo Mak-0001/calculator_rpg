@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bi0rt3x27p2a5"]
+
+[ext_resource type="Script" uid="uid://bsc1hl1nhw208" path="res://scripts/enemies_script/cable.gd" id="1_o6evq"]
+[ext_resource type="Resource" uid="uid://ddixhgd3blec3" path="res://resources/enemy_resource/cable.tres" id="2_hxrnd"]
+[ext_resource type="Texture2D" uid="uid://ib8cv7ddo3op" path="res://assets/sprites/myszkatrawa.png" id="3_o6evq"]
+[ext_resource type="PackedScene" uid="uid://bw2jy27jk50n3" path="res://scenes/others/interact_area.tscn" id="4_jsrmy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_126ht"]
+size = Vector2(90, 95)
+
+[node name="mouse" type="CharacterBody2D" unique_id=117293058]
+script = ExtResource("1_o6evq")
+enemy_res_file = ExtResource("2_hxrnd")
+aligment = -1
+metadata/_custom_type_script = "uid://c168hqsvuodqf"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1303994674]
+texture = ExtResource("3_o6evq")
+
+[node name="Area" parent="." unique_id=1107595560 instance=ExtResource("4_jsrmy")]
+
+[node name="Label" parent="Area" index="0" unique_id=1580928276]
+text = ">attack"
+
+[node name="CollisionShape2D" parent="Area" index="2" unique_id=151938082]
+position = Vector2(7, 7.5)
+shape = SubResource("RectangleShape2D_126ht")
+debug_color = Color(0.7294407, 0, 0, 0.20784314)
+
+[node name="Timer" type="Timer" parent="." unique_id=45452325]
+wait_time = 0.67
+one_shot = true
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="player_entered" from="Area" to="." method="_on_area_player_entered"]
+[connection signal="player_exited" from="Area" to="." method="_on_area_player_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Area"]

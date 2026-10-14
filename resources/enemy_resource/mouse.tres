@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnemyFileResource" format=3 uid="uid://c60pyddvu58xd"]
+
+[ext_resource type="Script" uid="uid://dtsw0yp6uycmi" path="res://scripts/resources_templates/enemy_resource_template.gd" id="1_ycll3"]
+
+[resource]
+script = ExtResource("1_ycll3")
+enemy_name = "cable"
+enemy_title = "ethernet cable"
+enemy_max_health = 20
+metadata/_custom_type_script = "uid://dtsw0yp6uycmi"
