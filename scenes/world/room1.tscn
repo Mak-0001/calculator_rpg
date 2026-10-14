@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_o6xkw"]
 [ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_r3iy5"]
 [ext_resource type="PackedScene" uid="uid://b3456871yuu6s" path="res://scenes/enemies_scenes/enemy_placeholder.tscn" id="2_cmstx"]
+[ext_resource type="PackedScene" uid="uid://dxpu0exifvkgl" path="res://scenes/enemies_scenes/cable.tscn" id="2_q6a4c"]
 [ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_qhaqp"]
 [ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="4_e5y35"]
 [ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_4iskc"]
@@ -22,8 +23,12 @@ metadata/_custom_type_script = "uid://bg6p80306oe5c"
 [node name="Room1" type="Node2D" unique_id=322616530]
 script = ExtResource("1_r3iy5")
 
+[node name="Cable" parent="." unique_id=117293058 instance=ExtResource("2_q6a4c")]
+position = Vector2(-265, -46)
+ability_list = Array[ExtResource("4_e5y35")]([])
+
 [node name="EnemyPlaceholder" parent="." unique_id=1448996320 instance=ExtResource("2_cmstx")]
-position = Vector2(-127, 1)
+position = Vector2(-384, 109)
 aligment = 0
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_o6xkw")]

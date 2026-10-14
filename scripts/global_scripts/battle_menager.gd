@@ -66,7 +66,8 @@ func _process(_delta: float) -> void:
 		if(turn_of != WHOSE_TURN.PLAYER):
 			set_process(false);
 			await get_tree().create_timer(2).timeout;
-			handle_single_turn(nodes_in_battle[turn_index].my_turn(), 0);
+			if (state_of_battle == BATTLE_STATE.IN_PROGRESS):
+				handle_single_turn(nodes_in_battle[turn_index].my_turn(), 0);
 	
 	if(state_of_battle == BATTLE_STATE.LOADING):
 		var load_status = ResourceLoader.\

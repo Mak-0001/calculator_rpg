@@ -4,6 +4,5 @@
 
 [node name="BattleMenager" type="Node" unique_id=1188721193]
 script = ExtResource("1_2o3oq")
-arena = "uid://bvbsmg5ghwvok"
 
 [connection signal="ready" from="." to="." method="_on_ready"]

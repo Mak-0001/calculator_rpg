@@ -6,7 +6,7 @@ var player_here:bool = false;
 func _on_ready() -> void:
 	set_process(false);
 	#enemy_icon_path = ($Sprite2D.texture as Texture2D).resource_path;
-	connect_icon_text($Sprite2D.texture);
+	connect_icon_texture($Sprite2D.texture);
 	connect_interaction(area);
 
 func _on_area_player_entered() -> void:

@@ -28,7 +28,7 @@ var actions_per_turn: int = 2;
 
 var icon_path: String;
 
-func connect_icon_text(texture_res: Texture2D) -> void:
+func connect_icon_texture(texture_res: Texture2D) -> void:
 	icon_path = texture_res.resource_path;
 	
 func connect_icon_path(texture_res: String) -> void:
