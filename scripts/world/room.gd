@@ -2,8 +2,10 @@ extends Node2D
 
 class_name room;
 
+var pause_screen = preload("res://scenes/ui/pause_screen.tscn");
 
 func _on_ready() -> void:
+	self.add_child(pause_screen.instantiate());
 	if(MapMenager.dest_door == ""):
 		SignalBus.room_changed.emit(Vector2.ZERO, 2);#2 -> DIRECTION.Down
 		print("gate not defined");
