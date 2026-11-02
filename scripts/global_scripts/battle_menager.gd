@@ -13,7 +13,7 @@ var turn_of: WHOSE_TURN = WHOSE_TURN.NONE:
 	set(value):
 		turn_of = value;
 		if(arena_node):
-			(arena_node.turn_banner as Label).text = str(turn_of as int);
+			(arena_node.turn_banner as Label).text = WHOSE_TURN.keys()[turn_of];
 var turn_index: int:
 	set(value):
 		value = value % (len(nodes_in_battle) if len(nodes_in_battle) != 0 else 1);
@@ -45,9 +45,11 @@ func _on_ready() -> void:
 		set_process(true);
 	);
 	SignalBus.next_turn.connect(func():
-		print("===END OF TURN===");
+		#print("===END OF TURN===");
+		add_battle_log("===END OF TURN===");
+		await get_tree().create_timer(0.2).timeout;
 		for ent in nodes_in_battle:
-			ent.action_count = ent.actions_per_turn;
+			ent.action_count += ent.actions_per_turn;
 		SignalBus.update_battle_info.emit();
 		)
 
@@ -94,7 +96,7 @@ func start_battle(_enemy: Enemy):
 
 func arena_ready(arena_node_temp: CanvasLayer):
 	arena_node = arena_node_temp as Arena;
-	(arena_node.turn_banner as Label).text = str(turn_of as int);
+	(arena_node.turn_banner as Label).text = WHOSE_TURN.keys()[turn_of];
 	arena_node.set_battlefield(
 		GameMenager.playerNode, 
 		nodes_in_battle.slice(1,len(nodes_in_battle))
@@ -104,7 +106,6 @@ func arena_ready(arena_node_temp: CanvasLayer):
 
 
 func handle_single_turn(_ability: Callable, target_ind: int):
-	print((nodes_in_battle[turn_index].name) + ": ");
 	var output = _ability.call();
 	if(output >= 0):
 		deal_damage_to(target_ind, output);
@@ -114,3 +115,7 @@ func handle_single_turn(_ability: Callable, target_ind: int):
 func deal_damage_to(target_index: int, damage: int) -> void:
 	var target: Entity = nodes_in_battle[target_index];
 	target.take_damage(damage);
+
+func add_battle_log(text: String):
+	if(arena_node):
+		arena_node.add_log(text);

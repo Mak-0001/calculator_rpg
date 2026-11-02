@@ -14,7 +14,6 @@ var lang_index: int:
 		TranslationServer.set_locale(available_languages[lang_index]);
 
 func _on_ready() -> void:
-	print(TranslationServer.get_loaded_locales());
 	lang_index = 0;
 
 func _input(event: InputEvent) -> void:

@@ -3,6 +3,7 @@ class_name Arena
 
 @onready var player_options: GridContainer = %PlayerOptions
 @onready var turn_banner: Label = %turn_banner
+@onready var battle_tag: RichTextLabel = %battleTag
 
 var player: PlayerMain;
 var enemy: Enemy;
@@ -18,6 +19,7 @@ func _on_ready() -> void:
 	SignalBus.battle_started.connect(battle_start);
 	SignalBus.battle_to_end.connect(battle_end);
 	SignalBus.update_battle_info.connect(update_banner)
+	battle_tag.text = "===BATTLE STARTED===";
 	self.layer = 0;
 
 func battle_start():
@@ -60,9 +62,12 @@ func render_battle_profile(i: int):
 					BattleMenager.handle_single_turn(ab.ability_main, 1);
 			);
 		btn_temp = Button.new();
-		btn_temp.text = "Pomiń";
+		btn_temp.text = tr("SKIP_TURN");
 		player_options.add_child(btn_temp);
-		btn_temp.pressed.connect(entit.empty_turn);
+		btn_temp.pressed.connect(func():
+			if BattleMenager.turn_of == 0:
+				BattleMenager.handle_single_turn(volunteers[0].empty_turn, 0)
+		);
 
 func update_banner() -> void:
 	var container: Control;
@@ -76,4 +81,8 @@ func update_banner() -> void:
 		
 		sprite.texture = load(entit.icon_path);
 		label.text = "Health:{cur_hp}/{max_hp}".format({"cur_hp": entit.current_health, "max_hp": entit.max_health});
-		actions.text = "Actions:{cur_act}/{max_act}".format({"cur_act": entit.action_count, "max_act": entit.actions_per_turn});
+		actions.text = "{cur_act}/{max_act}".format({"cur_act": entit.action_count, "max_act": entit.actions_per_turn});
+
+func add_log(text: String):
+	battle_tag.newline();
+	battle_tag.append_text(text);

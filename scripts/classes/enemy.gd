@@ -24,7 +24,7 @@ func my_turn() -> Callable:
 
 func die():
 	SignalBus.battle_to_end.emit();
-	print(enemy_res_file.enemy_name + " died");
+	BattleMenager.add_battle_log(enemy_res_file.enemy_name + " died");
 	queue_free();
 
 func connect_interaction(area: InteractArea):

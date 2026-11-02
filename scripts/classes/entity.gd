@@ -21,6 +21,8 @@ var current_health: int = 10:
 
 var action_count: int:
 	set(value):
+		value = clamp(value, 0, actions_per_turn);
+		#print(self.name + "-actions-"+str(value))
 		if(value <= 0):
 			SignalBus.end_my_turn.emit();
 		action_count = value;
@@ -44,7 +46,7 @@ func my_turn():
 	pass
 
 func empty_turn():
-	print("empty turn")
+	BattleMenager.add_battle_log(self.name + ": empty turn")
 	action_count = 0;
 	#SignalBus.end_my_turn.emit();
 	return -1;
@@ -54,5 +56,5 @@ func take_damage(dam: int) -> void:
 
 func die():
 	SignalBus.battle_to_end.emit();
-	print(self.name + " died");
+	BattleMenager.add_battle_log(self.name + " died");
 	queue_free();
