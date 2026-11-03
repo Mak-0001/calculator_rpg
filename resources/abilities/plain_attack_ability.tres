@@ -5,7 +5,7 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_td2gp")
-ability_name = "Zwykły atak"
+ability_name = "Prosty atak"
 min_damage = 2
 max_damage = 4
 metadata/_custom_type_script = "uid://bg6p80306oe5c"

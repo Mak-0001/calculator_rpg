@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://c0x7jumh14bmt"]
+
+[ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="1_ljd4x"]
+[ext_resource type="Script" uid="uid://do7osdsmeas2s" path="res://scripts/resources_templates/ability_script_template.gd" id="1_tn47a"]
+
+[sub_resource type="GDScript" id="GDScript_tn47a"]
+script/source = "extends AbilityScript;
+
+
+static func main(source: Ability) -> int:
+	var output: int = randi_range(source.min_damage, source.max_damage);
+	BattleMenager.add_battle_log(source.ability_name + \": \" + str(output));
+	return output;
+"
+script = ExtResource("1_tn47a")
+metadata/_custom_type_script = "uid://do7osdsmeas2s"
+
+[resource]
+script = ExtResource("1_ljd4x")
+ability_name = "Zwykły atak"
+ability_cost = 2
+min_damage = 2
+max_damage = 4
+ability_script = SubResource("GDScript_tn47a")
+metadata/_custom_type_script = "uid://bg6p80306oe5c"

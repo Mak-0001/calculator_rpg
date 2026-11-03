@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("2_8it7h")
-ability_name = "Ucieczka"
+ability_name = "RUN_AWAY"
 ability_script = ExtResource("1_25nx1")
 metadata/_custom_type_script = "uid://bg6p80306oe5c"

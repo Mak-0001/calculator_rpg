@@ -1,17 +1,21 @@
 [gd_scene format=3 uid="uid://bi0rt3x27p2a5"]
 
 [ext_resource type="Script" uid="uid://bsc1hl1nhw208" path="res://scripts/enemies_script/cable.gd" id="1_o6evq"]
-[ext_resource type="Resource" uid="uid://ddixhgd3blec3" path="res://resources/enemy_resource/cable.tres" id="2_hxrnd"]
+[ext_resource type="Resource" uid="uid://c60pyddvu58xd" path="res://resources/enemy_resource/mouse.tres" id="2_o6evq"]
+[ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="3_jsrmy"]
 [ext_resource type="Texture2D" uid="uid://ib8cv7ddo3op" path="res://assets/sprites/myszkatrawa.png" id="3_o6evq"]
 [ext_resource type="PackedScene" uid="uid://bw2jy27jk50n3" path="res://scenes/others/interact_area.tscn" id="4_jsrmy"]
+[ext_resource type="Resource" uid="uid://c0x7jumh14bmt" path="res://resources/abilities/regular_attack_ability.tres" id="4_vbnrk"]
+[ext_resource type="Resource" uid="uid://cu3ocbusljbjw" path="res://resources/abilities/plain_attack_ability.tres" id="5_ood65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_126ht"]
 size = Vector2(90, 95)
 
 [node name="mouse" type="CharacterBody2D" unique_id=117293058]
 script = ExtResource("1_o6evq")
-enemy_res_file = ExtResource("2_hxrnd")
+enemy_res_file = ExtResource("2_o6evq")
 aligment = -1
+ability_list = Array[ExtResource("3_jsrmy")]([ExtResource("4_vbnrk"), ExtResource("5_ood65")])
 metadata/_custom_type_script = "uid://c168hqsvuodqf"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1303994674]

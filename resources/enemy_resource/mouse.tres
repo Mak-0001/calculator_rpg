@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_ycll3")
-enemy_name = "cable"
-enemy_title = "ethernet cable"
-enemy_max_health = 20
+enemy_name = "mouse"
+max_action = 4
 metadata/_custom_type_script = "uid://dtsw0yp6uycmi"

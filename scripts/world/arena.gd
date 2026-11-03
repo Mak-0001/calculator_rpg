@@ -54,7 +54,8 @@ func render_battle_profile(i: int):
 		var btn_temp: Button;
 		for ab in entit.ability_list:
 			btn_temp = Button.new();
-			btn_temp.text = ab.ability_name;
+			print(tr(ab.ability_name))
+			btn_temp.text = tr(ab.ability_name) + "[" + str(ab.ability_cost) + "]";
 			player_options.add_child(btn_temp);
 			btn_temp.pressed.connect(func():
 				if BattleMenager.turn_of == 0:
@@ -81,7 +82,7 @@ func update_banner() -> void:
 		
 		sprite.texture = load(entit.icon_path);
 		label.text = "Health:{cur_hp}/{max_hp}".format({"cur_hp": entit.current_health, "max_hp": entit.max_health});
-		actions.text = "{cur_act}/{max_act}".format({"cur_act": entit.action_count, "max_act": entit.actions_per_turn});
+		actions.text = "{cur_act}/{max_act}".format({"cur_act": entit.action_count, "max_act": entit.max_actions});
 
 func add_log(text: String):
 	battle_tag.newline();

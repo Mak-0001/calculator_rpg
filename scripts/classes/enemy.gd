@@ -5,9 +5,10 @@ class_name Enemy;
 @export var enemy_res_file: EnemyFileResource:
 	set(value):
 		enemy_res_file = value;
-		max_health = enemy_res_file.enemy_max_health
-		current_health = enemy_res_file.enemy_max_health
-		actions_per_turn = enemy_res_file.enemy_max_action;
+		max_health = enemy_res_file.max_health
+		current_health = enemy_res_file.max_health
+		actions_per_turn = enemy_res_file.actions_per_turn;
+		max_actions = enemy_res_file.max_action
 @export var aligment: ALIGMENT;
 
 func start_battle() -> void:

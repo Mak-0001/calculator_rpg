@@ -21,12 +21,13 @@ var current_health: int = 10:
 
 var action_count: int:
 	set(value):
-		value = clamp(value, 0, actions_per_turn);
+		action_count = clamp(value, 0, max_actions);
 		#print(self.name + "-actions-"+str(value))
-		if(value <= 0):
-			SignalBus.end_my_turn.emit();
-		action_count = value;
+		#if(value <= 0):
+			#SignalBus.end_my_turn.emit();
+		#action_count = value;
 var actions_per_turn: int = 2;
+var max_actions: int = 3;
 
 var icon_path: String;
 
@@ -47,9 +48,9 @@ func my_turn():
 
 func empty_turn():
 	BattleMenager.add_battle_log(self.name + ": empty turn")
-	action_count = 0;
+	#action_count = 0;
 	#SignalBus.end_my_turn.emit();
-	return -1;
+	return -10;
 
 func take_damage(dam: int) -> void:
 	current_health -= dam;

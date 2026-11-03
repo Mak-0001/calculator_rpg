@@ -1,5 +1,7 @@
 extends Node
 
+signal end_of_current_action;
+
 var arena: String = "res://scenes/world/arena.tscn";
 var arena_node: CanvasLayer;
 var progress: Array = [];
@@ -34,12 +36,14 @@ var state_of_battle: BATTLE_STATE;
 func _on_ready() -> void:
 	SignalBus.battle_to_start.connect(start_battle);
 	SignalBus.battle_to_end.connect(func(): 
+		await end_of_current_action;
 		nodes_in_battle.clear();
 		turn_of = WHOSE_TURN.NONE;
 		state_of_battle = BATTLE_STATE.OFF;
 		set_process(false);
 	);
 	SignalBus.end_my_turn.connect(func(): 
+		await end_of_current_action;
 		turn_index+=1;
 		#await get_tree().create_timer(1).timeout;
 		set_process(true);
@@ -67,9 +71,10 @@ func _process(_delta: float) -> void:
 	if(state_of_battle == BATTLE_STATE.IN_PROGRESS):
 		if(turn_of != WHOSE_TURN.PLAYER):
 			set_process(false);
-			await get_tree().create_timer(2).timeout;
+			await get_tree().create_timer(1).timeout;
 			if (state_of_battle == BATTLE_STATE.IN_PROGRESS):
 				handle_single_turn(nodes_in_battle[turn_index].my_turn(), 0);
+				set_process(true);
 	
 	if(state_of_battle == BATTLE_STATE.LOADING):
 		var load_status = ResourceLoader.\
@@ -110,6 +115,9 @@ func handle_single_turn(_ability: Callable, target_ind: int):
 	if(output >= 0):
 		deal_damage_to(target_ind, output);
 	SignalBus.update_battle_info.emit();
+	if(nodes_in_battle[turn_index].action_count == 0 or output == AbilityScript.ability_type.SKIP_TURN):
+		SignalBus.end_my_turn.emit();
+	self.end_of_current_action.emit();
 
 
 func deal_damage_to(target_index: int, damage: int) -> void:
