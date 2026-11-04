@@ -37,6 +37,7 @@ grow_horizontal = 2
 text = "Turn of idk"
 
 [node name="Button" type="Button" parent="Panel" unique_id=2029232956]
+visible = false
 top_level = true
 z_index = 1
 layout_mode = 1

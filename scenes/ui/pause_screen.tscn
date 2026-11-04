@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://pvdmpqjdnrfe" path="res://resources/ui/pause_menu_btn.tres" id="2_xceqw"]
 
 [node name="PauseScreen" type="CanvasLayer" unique_id=2014718283]
+layer = 4
 script = ExtResource("1_fvuwu")
 
 [node name="ColorRect" type="Panel" parent="." unique_id=1324795337]

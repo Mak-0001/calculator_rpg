@@ -9,9 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://bh07fgnessbvr" path="res://assets/tilemap/tilemap_v1.png" id="6_dgd82"]
 [ext_resource type="TileSet" uid="uid://nvug8ycl5jl1" path="res://resources/tilemap_resources/tileset_v2.tres" id="7_nqtym"]
 [ext_resource type="PackedScene" uid="uid://bi0rt3x27p2a5" path="res://scenes/enemies_scenes/mouse.tscn" id="9_vihsx"]
-[ext_resource type="Resource" uid="uid://cu3ocbusljbjw" path="res://resources/abilities/plain_attack_ability.tres" id="10_inltv"]
 [ext_resource type="Resource" uid="uid://c0x7jumh14bmt" path="res://resources/abilities/regular_attack_ability.tres" id="11_ld7m6"]
-[ext_resource type="Resource" uid="uid://c60pyddvu58xd" path="res://resources/enemy_resource/mouse.tres" id="12_0qi83"]
+
+[sub_resource type="Resource" id="Resource_inltv"]
+resource_local_to_scene = true
+script = ExtResource("3_nqtym")
+ability_name = "Prosty atak"
+min_damage = 2
+max_damage = 4
+metadata/_custom_type_script = "uid://bg6p80306oe5c"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18ld8"]
 
@@ -30,7 +36,7 @@ script = ExtResource("1_mn8lo")
 
 [node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_u3nvq")]
 position = Vector2(44, -34)
-ability_list = Array[ExtResource("3_nqtym")]([ExtResource("4_vihsx"), ExtResource("10_inltv"), ExtResource("11_ld7m6")])
+ability_list = Array[ExtResource("3_nqtym")]([ExtResource("4_vihsx"), SubResource("Resource_inltv"), ExtResource("11_ld7m6")])
 
 [node name="gates" type="Node" parent="." unique_id=1666838475]
 
@@ -63,7 +69,6 @@ region_rect = Rect2(192, 32, 96, 64)
 
 [node name="mouse" parent="." unique_id=117293058 instance=ExtResource("9_vihsx")]
 position = Vector2(-203, 99)
-enemy_res_file = ExtResource("12_0qi83")
 ability_list = Array[ExtResource("3_nqtym")]([SubResource("Resource_ld7m6"), ExtResource("11_ld7m6")])
 
 [connection signal="ready" from="." to="." method="_on_ready"]

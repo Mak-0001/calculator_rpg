@@ -11,6 +11,8 @@ var enemy: Enemy;
 var banners: Array[Control];
 var volunteers: Array[Entity];#0: player, 1..: [enemy]
 
+var btn_costs: Array[int];
+
 func _on_ready() -> void:
 	banners.append(%FramePlayer);
 	banners.append(%FrameEnemy);
@@ -19,7 +21,7 @@ func _on_ready() -> void:
 	SignalBus.battle_started.connect(battle_start);
 	SignalBus.battle_to_end.connect(battle_end);
 	SignalBus.update_battle_info.connect(update_banner)
-	battle_tag.text = "===BATTLE STARTED===";
+	battle_tag.text = "===" + tr("BATTLE_STARTED") + "===";
 	self.layer = 0;
 
 func battle_start():
@@ -54,7 +56,6 @@ func render_battle_profile(i: int):
 		var btn_temp: Button;
 		for ab in entit.ability_list:
 			btn_temp = Button.new();
-			print(tr(ab.ability_name))
 			btn_temp.text = tr(ab.ability_name) + "[" + str(ab.ability_cost) + "]";
 			player_options.add_child(btn_temp);
 			btn_temp.pressed.connect(func():
@@ -62,6 +63,7 @@ func render_battle_profile(i: int):
 					volunteers[0].action_count -= ab.ability_cost;
 					BattleMenager.handle_single_turn(ab.ability_main, 1);
 			);
+			btn_costs.append(ab.ability_cost);
 		btn_temp = Button.new();
 		btn_temp.text = tr("SKIP_TURN");
 		player_options.add_child(btn_temp);
@@ -69,13 +71,16 @@ func render_battle_profile(i: int):
 			if BattleMenager.turn_of == 0:
 				BattleMenager.handle_single_turn(volunteers[0].empty_turn, 0)
 		);
+		btn_costs.append(0);
 
 func update_banner() -> void:
 	var container: Control;
 	var entit: Entity;
+	
 	for i in range(len(volunteers)):
 		container = banners[i];
 		entit = volunteers[i];
+		
 		var sprite = container.find_child("sprite");
 		var label = container.find_child("label");
 		var actions = container.find_child("actions");
@@ -87,3 +92,8 @@ func update_banner() -> void:
 func add_log(text: String):
 	battle_tag.newline();
 	battle_tag.append_text(text);
+
+func update_btns():
+	var temp_btns = player_options.get_children();
+	for i in range(len(temp_btns)):
+		temp_btns[i].set_deferred("disabled",btn_costs[i] > GameMenager.playerNode.action_count);

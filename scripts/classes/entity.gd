@@ -6,7 +6,14 @@ enum STATES {ALIVE = 1, DEAD = -1, HURT = -2}
 enum TRANSPORT {IDLE = 1, RUN = 2, FREEZE = 3, SPECIAL = -1, STEALTH = 4}
 enum ALIGMENT {FRIENDLY = 1, NEUTRAL = 0, AGGRESIVE = -1, TOTAL_AGGRESSIVE = -2}
 
-@export var ability_list: Array[Ability];
+var min_cost_ability: int = 1_000_000;
+
+@export var ability_list: Array[Ability]:
+	set(value):
+		ability_list = value;
+		for ab in ability_list:
+			if(ab.ability_cost < min_cost_ability):
+				min_cost_ability = ab.ability_cost;
 #@icon()
 
 var max_health: int = 10:
@@ -22,6 +29,7 @@ var current_health: int = 10:
 var action_count: int:
 	set(value):
 		action_count = clamp(value, 0, max_actions);
+		actions_changed();
 		#print(self.name + "-actions-"+str(value))
 		#if(value <= 0):
 			#SignalBus.end_my_turn.emit();
@@ -51,6 +59,9 @@ func empty_turn():
 	#action_count = 0;
 	#SignalBus.end_my_turn.emit();
 	return -10;
+
+func actions_changed():
+	pass
 
 func take_damage(dam: int) -> void:
 	current_health -= dam;

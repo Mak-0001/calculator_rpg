@@ -12,7 +12,6 @@ const MAX_SPEED := 80.00;
 var curr_direction : POSS_DIRECTION;
 var can_interact: bool = true;
 
-
 #region basics
 func _on_ready() -> void:
 	connect_icon_path("res://assets/sprites/calc1.png");
@@ -93,6 +92,9 @@ func battle_ready(_enemy):
 func battle_over():
 	self.can_interact = true;
 	self.set_physics_process(true);
+
+func actions_changed():
+	SignalBus.update_players_btns.emit();
 
 #endregion
 #region health

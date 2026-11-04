@@ -2,13 +2,14 @@ extends Entity;
 
 class_name Enemy;
 
+
 @export var enemy_res_file: EnemyFileResource:
 	set(value):
 		enemy_res_file = value;
 		max_health = enemy_res_file.max_health
 		current_health = enemy_res_file.max_health
 		actions_per_turn = enemy_res_file.actions_per_turn;
-		max_actions = enemy_res_file.max_action
+		max_actions = enemy_res_file.max_action;
 @export var aligment: ALIGMENT;
 
 func start_battle() -> void:
@@ -17,9 +18,13 @@ func start_battle() -> void:
 	);
 
 func my_turn() -> Callable:
-	if(len(ability_list) <= 0):
+	if(len(ability_list) <= 0 or action_count < min_cost_ability):
 		return empty_turn;
-	var att_ind = randi_range(0, len(ability_list) - 1);
+	var att_ind: int;
+	while(true):
+		att_ind = randi_range(0, len(ability_list) - 1);
+		if(ability_list[att_ind].ability_cost <= action_count):
+			break;
 	action_count -= ability_list[att_ind].ability_cost;
 	return ability_list[att_ind].ability_main;
 

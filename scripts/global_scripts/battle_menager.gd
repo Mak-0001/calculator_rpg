@@ -50,11 +50,15 @@ func _on_ready() -> void:
 	);
 	SignalBus.next_turn.connect(func():
 		#print("===END OF TURN===");
-		add_battle_log("===END OF TURN===");
+		add_battle_log("===" + tr("END_OF_ROUND") + "===");
 		await get_tree().create_timer(0.2).timeout;
 		for ent in nodes_in_battle:
 			ent.action_count += ent.actions_per_turn;
 		SignalBus.update_battle_info.emit();
+		)
+	SignalBus.update_players_btns.connect(func():
+		if(arena_node):
+			arena_node.update_btns();
 		)
 
 func go_to_battle() -> void:
@@ -95,6 +99,8 @@ func _process(_delta: float) -> void:
 func start_battle(_enemy: Enemy):
 	nodes_in_battle.append(GameMenager.playerNode);
 	nodes_in_battle.append(_enemy);
+	for i in nodes_in_battle:
+		i.action_count = 0;
 	turn_of = WHOSE_TURN.PLAYER;
 	turn_index = 0;
 	go_to_battle();
