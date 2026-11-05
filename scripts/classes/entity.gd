@@ -26,6 +26,8 @@ var current_health: int = 10:
 		if(value <= 0):
 			die();
 
+var block: int = 0; #zerowane przy turn_index.set()
+
 var action_count: int:
 	set(value):
 		action_count = clamp(value, 0, max_actions);
@@ -64,7 +66,13 @@ func actions_changed():
 	pass
 
 func take_damage(dam: int) -> void:
-	current_health -= dam;
+	if(block > 0):
+		var absorbed: int = mini(block, dam);
+		block -= absorbed;
+		dam -= absorbed;
+		BattleMenager.add_battle_log("Block: -" + str(absorbed));
+	if(dam > 0):
+		current_health -= dam;
 
 func die():
 	SignalBus.battle_to_end.emit();

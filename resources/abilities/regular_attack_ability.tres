@@ -21,5 +21,8 @@ ability_name = "Zwykły atak"
 ability_cost = 2
 min_damage = 2
 max_damage = 4
+extra = Dictionary[String, Variant]({
+"": null
+})
 ability_script = SubResource("GDScript_tn47a")
 metadata/_custom_type_script = "uid://bg6p80306oe5c"

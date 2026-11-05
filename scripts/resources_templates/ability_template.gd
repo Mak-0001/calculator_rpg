@@ -6,7 +6,7 @@ class_name Ability;
 @export_category("akcja")
 @export var min_damage: int;
 @export var max_damage: int;
-@export var extra: Dictionary;
+@export var extra: Dictionary[String,Variant];
 @export var ability_script: Script;
 
 func ability_main() -> int:

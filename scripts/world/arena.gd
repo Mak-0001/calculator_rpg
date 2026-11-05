@@ -87,6 +87,8 @@ func update_banner() -> void:
 		
 		sprite.texture = load(entit.icon_path);
 		label.text = "Health:{cur_hp}/{max_hp}".format({"cur_hp": entit.current_health, "max_hp": entit.max_health});
+		if(entit.block > 0):
+			label.text += " Block:" + str(entit.block);
 		actions.text = "{cur_act}/{max_act}".format({"cur_act": entit.action_count, "max_act": entit.max_actions});
 
 func add_log(text: String):

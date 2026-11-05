@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://wru17n5p0xfe"]
+
+[ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="1_abil"]
+[ext_resource type="Script" uid="uid://c2cb0jdmom10e" path="res://resources/abilities/block_script.gd" id="2_blk"]
+
+[resource]
+script = ExtResource("1_abil")
+ability_name = "Blok"
+extra = Dictionary[String, Variant]({
+"block_amount": 3
+})
+ability_script = ExtResource("2_blk")
+metadata/_custom_type_script = "uid://bg6p80306oe5c"

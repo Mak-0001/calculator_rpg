@@ -28,6 +28,10 @@ var turn_index: int:
 		else:
 			turn_of = WHOSE_TURN.NONE;
 		turn_index = value;
+		#| dodane przez Klaudiusza
+		#V
+		if(len(nodes_in_battle) > 0 and is_instance_valid(nodes_in_battle[value])):
+			nodes_in_battle[value].block = 0;
 
 enum BATTLE_STATE {LOADING = 0, IN_PROGRESS = 1, OFF = -1};
 var state_of_battle: BATTLE_STATE;
