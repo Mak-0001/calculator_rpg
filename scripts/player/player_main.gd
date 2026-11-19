@@ -3,7 +3,7 @@ class_name PlayerMain;
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D;
 
 #region enums
-enum POSS_DIRECTION {Up, Right, Down, Left};
+enum POSS_DIRECTION {Up, Right, Down, Left, NONE};
 #endregion
 #region stałe
 const MAX_SPEED := 80.00;
@@ -24,7 +24,6 @@ func _on_tree_exited() -> void:
 	GameMenager.playerNode = null;
 
 func _physics_process(_delta: float) -> void:
-	check_direction();
 	anim_play();
 	
 	var left_right_vec := Input.get_axis("left","right");
@@ -33,17 +32,15 @@ func _physics_process(_delta: float) -> void:
 	if(left_right_vec != 0):
 		velocity.x = MAX_SPEED * left_right_vec;
 		velocity.y = 0;
-	else:
+		curr_direction = POSS_DIRECTION.Right if left_right_vec > 0 else POSS_DIRECTION.Left;
+	elif(down_up_vec != 0):
 		velocity.y = MAX_SPEED * down_up_vec;
 		velocity.x = 0;
-	
+		curr_direction = POSS_DIRECTION.Down if down_up_vec > 0 else POSS_DIRECTION.Up;
+	else:
+		velocity = Vector2.ZERO;
+		curr_direction = POSS_DIRECTION.NONE;
 	move_and_slide();
-
-func check_direction() -> void:
-	if(velocity.y != 0):
-		curr_direction = POSS_DIRECTION.Up if velocity.y > 0 else POSS_DIRECTION.Down;
-	elif(velocity.x != 0):
-		curr_direction = POSS_DIRECTION.Right if velocity.x > 0 else POSS_DIRECTION.Left;
 
 func enter_room(pos:Vector2, dir: int) -> void:
 	global_position = pos;
@@ -53,8 +50,7 @@ func enter_room(pos:Vector2, dir: int) -> void:
 #region animations
 func anim_play() -> void:
 	if(velocity == Vector2.ZERO):
-		animated_sprite_2d.pause();
-	else:
+		animated_sprite_2d.pause()
 		#oparte na wektorze ruchu
 		#if(velocity.x != 0):
 			#animated_sprite_2d.play("side")
@@ -65,21 +61,21 @@ func anim_play() -> void:
 			#else:
 				#animated_sprite_2d.play("backward");
 		#oparte na kierunku
-		match curr_direction:
-			POSS_DIRECTION.Up:
-				animated_sprite_2d.play("forward");
-				animated_sprite_2d.flip_h = false;
-			POSS_DIRECTION.Down:
-				animated_sprite_2d.play("backward");
-				animated_sprite_2d.flip_h = false;
-			POSS_DIRECTION.Right:
-				animated_sprite_2d.play("side");
-				animated_sprite_2d.flip_h = false;
-			POSS_DIRECTION.Left:
-				animated_sprite_2d.play("side");
-				animated_sprite_2d.flip_h = true;
-			_:
-				pass;
+	match curr_direction:
+		POSS_DIRECTION.Down:
+			animated_sprite_2d.play("forward");
+			animated_sprite_2d.flip_h = false;
+		POSS_DIRECTION.Up:
+			animated_sprite_2d.play("backward");
+			animated_sprite_2d.flip_h = false;
+		POSS_DIRECTION.Right:
+			animated_sprite_2d.play("side");
+			animated_sprite_2d.flip_h = false;
+		POSS_DIRECTION.Left:
+			animated_sprite_2d.play("side");
+			animated_sprite_2d.flip_h = true;
+		_:
+			pass;
 
 #endregion
 #region battle

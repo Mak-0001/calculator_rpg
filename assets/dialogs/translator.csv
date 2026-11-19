@@ -1,8 +1,14 @@
 ,Polski,English
+GAME_TITLE,Kalkulator RPG,Calculator RPG
 QUIT_GAME,Wyjdź,Quit
+PLAY_BTN,Graj,Play
+MAIN_MENU_BTN,Główne menu,Main menu
 RESUME_GAME,Wznów,Resume
 OPEN_SETTINGS,Ustawienia,Settings
 SKIP_TURN,Pomiń,Skip
 RUN_AWAY,Ucieczka,Run away
 BATTLE_STARTED,WALKA ROZPOCZĘTA,BATTLE STARTED
 END_OF_ROUND,KONIEC RUNDY,END OF ROUND
+STORY_1,Jesteś na ścieżce w systemie","\nna końcu tej ścieżki jest folder.,You're on the path in system.\nAnd at the end of that path is folder.
+STORY_2,W plikach w tym folderze jest wirus.,And in the files of that folder is a virus.
+STORY_3,Jesteś tu by go zniszczyć.\n\nJeśli tego nie zrobisz"," nastapi koniec komputera.,You are here to slay it.\n\nIf you don't"," it will be the end of the computer.

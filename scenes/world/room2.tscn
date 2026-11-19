@@ -1,0 +1,24 @@
+[gd_scene format=4 uid="uid://bgwr10u67svjn"]
+
+[ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_4n6ce"]
+[ext_resource type="TileSet" uid="uid://nvug8ycl5jl1" path="res://resources/tilemap_resources/tileset_v2.tres" id="2_incbe"]
+[ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_5fawn"]
+[ext_resource type="Resource" uid="uid://ws8he5bl8cdm" path="res://resources/door_keys/room1_room2.tres" id="4_incbe"]
+
+[node name="Room2" type="Node2D" unique_id=597270959]
+script = ExtResource("1_4n6ce")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=449571124]
+tile_map_data = PackedByteArray("AAD+////AQABAAQAAAD/////AQACAAQAAAAAAP//AQACAAQAAAABAP//AQADAAQAAAABAAAAAQADAAQAAAAAAAAAAQACAAQAAAD//wAAAQACAAQAAAD+/wAAAQABAAQAAAD+/wEAAQABAAUAAAD//wEAAQACAAUAAAAAAAEAAQACAAUAAAABAAEAAQADAAUAAAABAP7/AQADAAMAAAAAAP7/AQACAAMAAAD///7/AQACAAMAAAD+//7/AQABAAMAAAD9/wIAAQAEAAIAAAD8/wEAAQAFAAIAAAACAAEAAQAFAAUAAAADAAAAAQAFAAIAAAACAP7/AQAEAAUAAAABAP3/AQAFAAUAAAD9////AQAFAAIAAAD+//3/AQAEAAIAAAD9//z/AQAEAAIAAAD///z/AQAEAAIAAAABAAMAAQAFAAIAAAD//wIAAQAEAAIAAAA=")
+tile_set = ExtResource("2_incbe")
+
+[node name="gates" type="Node" parent="." unique_id=1958457345]
+
+[node name="Gate" parent="gates" unique_id=776249544 instance=ExtResource("3_5fawn")]
+key_resource = ExtResource("4_incbe")
+ask_player = true
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+
+[editable path="gates/Gate"]
+[editable path="gates/Gate/Area"]

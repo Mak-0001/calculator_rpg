@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://crf50tp2ysad3"]
+
+[ext_resource type="Texture2D" uid="uid://bh07fgnessbvr" path="res://assets/tilemap/tilemap_v1.png" id="1_i24ml"]
+[ext_resource type="Script" uid="uid://bdsf0vfaxl51e" path="res://scripts/others/home_folder.gd" id="2_63h67"]
+[ext_resource type="PackedScene" uid="uid://bw2jy27jk50n3" path="res://scenes/others/interact_area.tscn" id="3_85gi8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1y73"]
+size = Vector2(26, 29)
+
+[node name="Home_folder" type="Sprite2D" unique_id=796376250]
+texture = ExtResource("1_i24ml")
+region_enabled = true
+region_rect = Rect2(192, 32, 96, 64)
+script = ExtResource("2_63h67")
+
+[node name="Area" parent="." unique_id=1107595560 instance=ExtResource("3_85gi8")]
+
+[node name="Label" parent="Area" index="0" unique_id=1580928276]
+offset_left = -35.0
+offset_top = -23.0
+offset_right = 35.0
+offset_bottom = 0.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = ">enter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" parent="Area" index="2" unique_id=151938082]
+position = Vector2(0, 15.5)
+shape = SubResource("RectangleShape2D_f1y73")
+
+[connection signal="interact_now" from="Area" to="." method="_on_area_interact_now"]
+[connection signal="player_entered" from="Area" to="." method="_on_area_player_entered"]
+
+[editable path="Area"]

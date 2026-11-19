@@ -41,7 +41,8 @@ func set_battlefield(player_temp: PlayerMain, enemy_temp: Array[Entity]):
 
 	for i in range(len(volunteers)):
 		render_battle_profile(i);
-	update_banner()
+	update_banner();
+	update_btns();
 	await get_tree().create_timer(0.5).timeout;
 	TransitionScript.fade_out(Color(0,0,255));
 	await TransitionScript.fade_out_complete;

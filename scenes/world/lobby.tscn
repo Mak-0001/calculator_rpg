@@ -1,24 +1,20 @@
 [gd_scene format=4 uid="uid://cw75pcaj34p20"]
 
 [ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_mn8lo"]
-[ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_u3nvq"]
 [ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="3_nqtym"]
 [ext_resource type="PackedScene" uid="uid://jadnhxbu1cm0" path="res://scenes/others/gate.tscn" id="3_pwvnl"]
-[ext_resource type="Resource" uid="uid://badxoxq6mdagg" path="res://resources/abilities/run_away_ability.tres" id="4_vihsx"]
-[ext_resource type="Resource" uid="uid://cu3ocbusljbjw" path="res://resources/abilities/plain_attack_ability.tres" id="5_7v0f8"]
 [ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_krpwf"]
-[ext_resource type="Texture2D" uid="uid://bh07fgnessbvr" path="res://assets/tilemap/tilemap_v1.png" id="6_dgd82"]
-[ext_resource type="Resource" path="res://resources/abilities/strong_attack_ability.tres" id="7_crcv2"]
+[ext_resource type="PackedScene" uid="uid://crf50tp2ysad3" path="res://scenes/others/home_folder.tscn" id="5_ld7m6"]
 [ext_resource type="TileSet" uid="uid://nvug8ycl5jl1" path="res://resources/tilemap_resources/tileset_v2.tres" id="7_nqtym"]
-[ext_resource type="Resource" uid="uid://wru17n5p0xfe" path="res://resources/abilities/block_ability.tres" id="8_prsq3"]
+[ext_resource type="Texture2D" uid="uid://dagu0iurn263w" path="res://assets/sprites/extra_sign.png" id="9_ld7m6"]
 [ext_resource type="PackedScene" uid="uid://bi0rt3x27p2a5" path="res://scenes/enemies_scenes/mouse.tscn" id="9_vihsx"]
+[ext_resource type="Script" uid="uid://bwgjdbavbneoe" path="res://scripts/others/extra_sign_lobby.gd" id="10_0qi83"]
+[ext_resource type="PackedScene" uid="uid://bw2jy27jk50n3" path="res://scenes/others/interact_area.tscn" id="11_7v0f8"]
 [ext_resource type="Resource" uid="uid://c0x7jumh14bmt" path="res://resources/abilities/regular_attack_ability.tres" id="11_ld7m6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18ld8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bucd7"]
-
-[sub_resource type="Resource" id="Resource_7v0f8"]
+[sub_resource type="Resource" id="Resource_ld7m6"]
 resource_local_to_scene = true
 script = ExtResource("3_nqtym")
 ability_name = "Prosty atak"
@@ -26,19 +22,17 @@ min_damage = 2
 max_damage = 4
 metadata/_custom_type_script = "uid://bg6p80306oe5c"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ld7m6"]
+size = Vector2(32, 19)
+
 [node name="huhuh" type="Node2D" unique_id=713859746]
 script = ExtResource("1_mn8lo")
-
-[node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_u3nvq")]
-position = Vector2(44, -34)
-ability_list = Array[ExtResource("3_nqtym")]([ExtResource("4_vihsx"), ExtResource("5_7v0f8"), ExtResource("11_ld7m6"), ExtResource("7_crcv2"), ExtResource("8_prsq3")])
 
 [node name="gates" type="Node" parent="." unique_id=1666838475]
 
 [node name="Gate" parent="gates" unique_id=776249544 instance=ExtResource("3_pwvnl")]
 position = Vector2(97, -33)
 key_resource = ExtResource("5_krpwf")
-direction = 2
 ask_player = true
 
 [node name="CollisionShape2D" parent="gates/Gate" index="0" unique_id=725538783]
@@ -48,25 +42,42 @@ debug_color = Color(0.9471006, 5.0055983e-06, 0.5870054, 0.41960785)
 [node name="SpawnPoint" parent="gates/Gate" index="1" unique_id=848420764]
 position = Vector2(-1, 28)
 
-[node name="CollisionShape2D" parent="gates/Gate/Area" parent_id_path=PackedInt32Array(776249544, 1107595560) index="2" unique_id=151938082]
-shape = SubResource("RectangleShape2D_bucd7")
-
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1149125873]
 z_index = -1
 tile_map_data = PackedByteArray("AAACAP7/AQACAAAAAAACAP//AQACAAEAAAADAP//AQADAAEAAAADAP7/AQADAAAAAAACAAAAAQACAAEAAAABAAAAAQACAAEAAAABAP//AQACAAEAAAABAP7/AQACAAAAAAAAAAAAAQACAAEAAAAAAP//AQACAAEAAAAAAP7/AQACAAAAAAD///7/AQACAAAAAAD/////AQACAAEAAAD//wAAAQACAAEAAAD//wEAAQACAAIAAAAAAAEAAQACAAIAAAD+/wEAAQACAAIAAAD9/wEAAQACAAIAAAD8/wEAAQABAAIAAAD8/wAAAQABAAEAAAD8////AQABAAEAAAD8//7/AQABAAAAAAD9//7/AQACAAAAAAD+//7/AQACAAAAAAD+////AQACAAEAAAD9////AQACAAEAAAD9/wAAAQACAAEAAAD+/wAAAQACAAEAAAABAAEAAQACAAIAAAACAAEAAQACAAIAAAADAAEAAQADAAIAAAADAAAAAQADAAEAAAD//wMAAQAGAAUAAAD+/wMAAQAGAAIAAAD+/wIAAQAFAAIAAAD//wIAAQAEAAIAAAD9/wMAAQAGAAUAAAD9/wIAAQAFAAUAAAADAAMAAQAGAAUAAAAEAAIAAQAGAAIAAAADAAIAAQAFAAIAAAAEAAEAAQAGAAUAAAAEAP7/AQAGAAUAAAADAP3/AQAGAAIAAAACAP3/AQAGAAUAAAACAPz/AQAEAAIAAAADAPz/AQAEAAIAAAABAP3/AQAGAAIAAAABAPz/AQAFAAIAAAD+//3/AQAGAAIAAAD9//z/AQAGAAUAAAD9//3/AQAGAAUAAAD+//z/AQAFAAUAAAD8//3/AQAGAAUAAAD8//z/AQAFAAUAAAD7//7/AQAGAAUAAAD7////AQAGAAIAAAD6////AQAGAAUAAAD6//7/AQAEAAIAAAD7/wEAAQAGAAIAAAD7/wAAAQAEAAUAAAD7//3/AQAEAAIAAAAAAP3/AQAFAAIAAAAEAP3/AQAFAAIAAAAEAAAAAQAFAAUAAAAFAAEAAQAFAAIAAAAAAAMAAQAFAAIAAAACAAMAAQAFAAUAAAD8/wMAAQAEAAUAAAA=")
 tile_set = ExtResource("7_nqtym")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=142539293]
+[node name="Sprite2D" parent="." unique_id=796376250 instance=ExtResource("5_ld7m6")]
 position = Vector2(-56, -32)
-texture = ExtResource("6_dgd82")
-region_enabled = true
-region_rect = Rect2(192, 32, 96, 64)
 
 [node name="mouse" parent="." unique_id=117293058 instance=ExtResource("9_vihsx")]
 position = Vector2(-203, 99)
-ability_list = Array[ExtResource("3_nqtym")]([SubResource("Resource_7v0f8"), ExtResource("11_ld7m6")])
+ability_list = Array[ExtResource("3_nqtym")]([SubResource("Resource_ld7m6"), ExtResource("11_ld7m6")])
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1959073658 node_paths=PackedStringArray("interact_area")]
+position = Vector2(-438, 1)
+texture = ExtResource("9_ld7m6")
+script = ExtResource("10_0qi83")
+interact_area = NodePath("Area")
+
+[node name="Area" parent="Sprite2D2" unique_id=1107595560 instance=ExtResource("11_7v0f8")]
+
+[node name="Label" parent="Sprite2D2/Area" index="0" unique_id=1580928276]
+offset_left = -35.0
+offset_top = -38.0
+offset_right = 35.0
+offset_bottom = -15.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" parent="Sprite2D2/Area" index="2" unique_id=151938082]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_ld7m6")
 
 [connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="ready" from="Sprite2D2" to="Sprite2D2" method="_on_ready"]
 
 [editable path="gates/Gate"]
 [editable path="gates/Gate/Area"]
+[editable path="Sprite2D2/Area"]

@@ -4,14 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://bw2jy27jk50n3" path="res://scenes/others/interact_area.tscn" id="2_18ld8"]
 [ext_resource type="Texture2D" uid="uid://diurgaqrpeul8" path="res://assets/others/folder_icon.png" id="3_bucd7"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bucd7"]
+
 [node name="Gate" type="Area2D" unique_id=776249544]
 collision_layer = 4
 collision_mask = 512
 script = ExtResource("1_bl3dr")
-direction = null
-ask_player = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=725538783]
+shape = SubResource("RectangleShape2D_bucd7")
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=848420764]
 
@@ -33,4 +34,7 @@ grow_vertical = 2
 texture = ExtResource("3_bucd7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="interact_now" from="Area" to="." method="_on_area_interact_now"]
+
+[editable path="Area"]

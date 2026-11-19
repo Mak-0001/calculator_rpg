@@ -36,6 +36,11 @@ layout_mode = 2
 theme = ExtResource("2_xceqw")
 text = "RESUME_GAME"
 
+[node name="main_menu" type="Button" parent="ColorRect/VBoxContainer" unique_id=672479]
+unique_name_in_owner = true
+layout_mode = 2
+text = "MAIN_MENU_BTN"
+
 [node name="languages" type="OptionButton" parent="ColorRect/VBoxContainer" unique_id=943129149]
 unique_name_in_owner = true
 layout_mode = 2

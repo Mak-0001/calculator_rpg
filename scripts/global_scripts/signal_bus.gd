@@ -4,6 +4,7 @@ extends Node;
 
 signal room_changed(pos: Vector2, dir: int);
 signal language_changed();
+signal grass_changed();
 
 #region battle signals
 signal battle_to_start(enemy: Enemy);

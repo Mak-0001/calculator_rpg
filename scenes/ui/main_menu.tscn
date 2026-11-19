@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://dnyenoqmub5d4"]
+
+[ext_resource type="Script" uid="uid://2w6pkc1g76eb" path="res://scripts/ui/main_menu.gd" id="1_sl1te"]
+[ext_resource type="Theme" uid="uid://pvdmpqjdnrfe" path="res://resources/ui/pause_menu_btn.tres" id="2_fe2o3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_g4v7s"]
+Panel/styles/panel = SubResource("StyleBoxFlat_yf5fn")
+
+[node name="MainMenu" type="CanvasLayer" unique_id=1741148156]
+process_mode = 3
+script = ExtResource("1_sl1te")
+
+[node name="Label" type="Label" parent="." unique_id=405688498]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -109.0
+offset_right = 20.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "GAME_TITLE"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1465935109]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -20.0
+offset_right = 43.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="btnStart" type="Button" parent="VBoxContainer" unique_id=68409986]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_fe2o3")
+text = "PLAY_BTN"
+
+[node name="languages_container" type="OptionButton" parent="VBoxContainer" unique_id=2111561256]
+layout_mode = 2
+theme = ExtResource("2_fe2o3")
+
+[node name="btnQuit" type="Button" parent="VBoxContainer" unique_id=1889964182]
+layout_mode = 2
+theme = ExtResource("2_fe2o3")
+text = "QUIT_GAME"
+
+[node name="Panel" type="Panel" parent="." unique_id=554058309]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_g4v7s")
+
+[node name="narrator_label" type="Label" parent="Panel" unique_id=1710535211]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "Cokooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
+vertical_alignment = 1
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="pressed" from="VBoxContainer/btnStart" to="." method="_on_button_pressed"]

@@ -11,6 +11,7 @@ func _on_ready() -> void:
 	dir_name.visible = false;
 
 func fade_in(fog_color: Color = Color(0,0,0)):
+	show();
 	color_rect.color = fog_color;
 	animation_player.play("fade_in");
 
@@ -37,5 +38,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			fade_in_complete.emit();
 		"fade_out":
 			fade_out_complete.emit();
+			hide();
 		"show_folder":
 			show_folder_complete.emit();

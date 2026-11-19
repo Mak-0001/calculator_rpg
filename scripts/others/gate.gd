@@ -28,3 +28,7 @@ func use_gate() -> void:
 
 func _on_area_interact_now() -> void:
 	use_gate();
+
+func _on_ready() -> void:
+	(interact_area.find_child("CollisionShape2D") \
+	 as CollisionShape2D).shape = $CollisionShape2D.shape

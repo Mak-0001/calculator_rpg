@@ -121,6 +121,8 @@ _data = {
 }
 
 [node name="TransitionScript" type="CanvasLayer" unique_id=1472477741]
+layer = 2
+visible = false
 script = ExtResource("1_ptl33")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2011123459]

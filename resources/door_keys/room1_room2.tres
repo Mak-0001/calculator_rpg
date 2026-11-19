@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DoorKeysTemplate" format=3 uid="uid://ws8he5bl8cdm"]
+
+[ext_resource type="Script" uid="uid://dc4xv1agq2mk4" path="res://scripts/resources_templates/door_keys_template.gd" id="1_hua1p"]
+
+[resource]
+script = ExtResource("1_hua1p")
+level1 = "uid://byb4pgup73io2"
+gate1 = "Gate2"
+level2 = "uid://bgwr10u67svjn"
+metadata/_custom_type_script = "uid://dc4xv1agq2mk4"

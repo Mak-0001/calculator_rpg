@@ -7,6 +7,11 @@ var pause_screen: CanvasLayer;
 
 var game_running: bool = true;
 
+var grass_overwhelmed: int = 100:
+	set(value):
+		grass_overwhelmed = value;
+		SignalBus.grass_changed.emit();
+
 var available_languages: PackedStringArray = TranslationServer.get_loaded_locales();
 var lang_index: int: 
 	set(value):

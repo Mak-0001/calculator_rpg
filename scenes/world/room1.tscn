@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://byb4pgup73io2"]
 
-[ext_resource type="PackedScene" uid="uid://bogv5gmjvvv2q" path="res://scenes/player/player_main.tscn" id="1_o6xkw"]
 [ext_resource type="Script" uid="uid://d30mfjqe7xl0p" path="res://scripts/world/room.gd" id="1_r3iy5"]
 [ext_resource type="PackedScene" uid="uid://b3456871yuu6s" path="res://scenes/enemies_scenes/enemy_placeholder.tscn" id="2_cmstx"]
 [ext_resource type="PackedScene" uid="uid://bi0rt3x27p2a5" path="res://scenes/enemies_scenes/mouse.tscn" id="2_jl2wn"]
@@ -9,47 +8,32 @@
 [ext_resource type="Script" uid="uid://bg6p80306oe5c" path="res://scripts/resources_templates/ability_template.gd" id="4_e5y35"]
 [ext_resource type="Resource" uid="uid://c0x7jumh14bmt" path="res://resources/abilities/regular_attack_ability.tres" id="4_ejfdt"]
 [ext_resource type="Resource" uid="uid://dtcrmg5v2faik" path="res://resources/door_keys/lobby_room1.tres" id="5_4iskc"]
-[ext_resource type="Resource" uid="uid://badxoxq6mdagg" path="res://resources/abilities/run_away_ability.tres" id="5_q6a4c"]
+[ext_resource type="Resource" uid="uid://ws8he5bl8cdm" path="res://resources/door_keys/room1_room2.tres" id="9_jl2wn"]
 [ext_resource type="TileSet" uid="uid://nvug8ycl5jl1" path="res://resources/tilemap_resources/tileset_v2.tres" id="10_jl2wn"]
-[ext_resource type="Resource" path="res://resources/abilities/strong_attack_ability.tres" id="10_w3exs"]
-[ext_resource type="Resource" uid="uid://wru17n5p0xfe" path="res://resources/abilities/block_ability.tres" id="11_sk8ri"]
 
-[sub_resource type="Resource" id="Resource_xcun8"]
+[sub_resource type="Resource" id="Resource_jl2wn"]
 resource_local_to_scene = true
 script = ExtResource("4_e5y35")
 ability_name = "Prosty atak"
 min_damage = 2
 max_damage = 4
 metadata/_custom_type_script = "uid://bg6p80306oe5c"
-
-[sub_resource type="Resource" id="Resource_w3exs"]
-resource_local_to_scene = true
-script = ExtResource("4_e5y35")
-ability_name = "Prosty atak"
-min_damage = 2
-max_damage = 4
-metadata/_custom_type_script = "uid://bg6p80306oe5c"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1y6sv"]
 
 [node name="Room1" type="Node2D" unique_id=322616530]
 script = ExtResource("1_r3iy5")
 
 [node name="mouse" parent="." unique_id=117293058 instance=ExtResource("2_jl2wn")]
-position = Vector2(-220, 28.000004)
+position = Vector2(-181.00002, 30.000002)
 scale = Vector2(0.43109468, 0.43109468)
-ability_list = Array[ExtResource("4_e5y35")]([ExtResource("4_ejfdt"), SubResource("Resource_xcun8")])
+ability_list = Array[ExtResource("4_e5y35")]([ExtResource("4_ejfdt"), SubResource("Resource_jl2wn")])
 
 [node name="Cable" parent="." unique_id=2060081384 instance=ExtResource("2_q6a4c")]
-position = Vector2(-251, -30.000004)
+position = Vector2(-127.000015, -31.000002)
 scale = Vector2(0.4080676, 0.4080676)
 
 [node name="EnemyPlaceholder" parent="." unique_id=1448996320 instance=ExtResource("2_cmstx")]
 position = Vector2(-384, 109)
 aligment = 0
-
-[node name="PlayerMain" parent="." unique_id=1867720141 instance=ExtResource("1_o6xkw")]
-ability_list = Array[ExtResource("4_e5y35")]([ExtResource("5_q6a4c"), SubResource("Resource_w3exs"), ExtResource("4_ejfdt"), ExtResource("10_w3exs"), ExtResource("11_sk8ri")])
 
 [node name="gates" type="Node" parent="." unique_id=2071274928]
 
@@ -57,13 +41,28 @@ ability_list = Array[ExtResource("4_e5y35")]([ExtResource("5_q6a4c"), SubResourc
 position = Vector2(282, -6)
 key_resource = ExtResource("5_4iskc")
 direction = 3
+ask_player = true
 
 [node name="CollisionShape2D" parent="gates/Gate" index="0" unique_id=725538783]
-shape = SubResource("RectangleShape2D_1y6sv")
 debug_color = Color(0.6456857, 0.5224494, 1.92523e-07, 0.41960785)
 
 [node name="SpawnPoint" parent="gates/Gate" index="1" unique_id=848420764]
 position = Vector2(-49, 5)
+
+[node name="Gate2" parent="gates" unique_id=1321915542 instance=ExtResource("3_qhaqp")]
+position = Vector2(-250, 10)
+key_resource = ExtResource("9_jl2wn")
+direction = 1
+ask_player = true
+
+[node name="CollisionShape2D" parent="gates/Gate2" index="0" unique_id=725538783]
+debug_color = Color(0.62346834, 0.533258, 0, 0.41960785)
+
+[node name="SpawnPoint" parent="gates/Gate2" index="1" unique_id=848420764]
+position = Vector2(35, 27)
+
+[node name="Gate3" parent="gates" unique_id=648152787 instance=ExtResource("3_qhaqp")]
+position = Vector2(-430, -50)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1194907461]
 z_index = -1
@@ -73,3 +72,8 @@ tile_set = ExtResource("10_jl2wn")
 [connection signal="ready" from="." to="." method="_on_ready"]
 
 [editable path="gates/Gate"]
+[editable path="gates/Gate/Area"]
+[editable path="gates/Gate2"]
+[editable path="gates/Gate2/Area"]
+[editable path="gates/Gate3"]
+[editable path="gates/Gate3/Area"]
